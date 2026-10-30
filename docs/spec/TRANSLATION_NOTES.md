@@ -3,7 +3,8 @@
 The original specification is in Russian:
 `original/ECG-AI_KG_TS_RU_original.docx` (original file name:
 `ЭКГ-ИИ ТЗ и обоснование для МЗ КР.docx` — "ECG-AI: Technical Specification and Rationale
-for the MoH KR").
+for the MoH KR"). Document metadata author: ~~██████ ████████████~~ (redacted for privacy, also in the
+original file's metadata; the document content is unchanged).
 
 The English (`en/`) and French (`fr/`) versions are **translations only**: same content,
 same structure, same layout. Nothing was added, removed or corrected, except:
