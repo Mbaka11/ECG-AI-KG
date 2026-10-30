@@ -6,7 +6,8 @@ facilities in Kyrgyzstan.**
 A feldsher or general practitioner records an ECG, takes a photo of the paper strip, and the
 app digitises the signal, flags suspected life-threatening patterns (acute coronary
 syndrome, atrial fibrillation, ventricular tachycardia, complete AV block, …) with an
-urgency level and short next-step guidance — online or offline, in Kyrgyz and Russian.
+urgency level and short next-step guidance — online or offline, in Russian, Kyrgyz and
+English.
 
 > ⚠️ **Research project — not a medical device.** Nothing in this repository is validated
 > for clinical use. Results are decision support only; the final decision always rests
@@ -22,7 +23,7 @@ See the [project plan](docs/PLAN.md).
 | Document | Link |
 |---|---|
 | Project plan | [docs/PLAN.md](docs/PLAN.md) |
-| Open questions for the author | [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) |
+| Open questions | [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) |
 | Specification — English | [md](docs/spec/en/ECG-AI_KG_TS_EN.md) · [pdf](docs/spec/en/ECG-AI_KG_TS_EN.pdf) · [docx](docs/spec/en/ECG-AI_KG_TS_EN.docx) |
 | Specification — French | [md](docs/spec/fr/ECG-AI_KG_TS_FR.md) · [pdf](docs/spec/fr/ECG-AI_KG_TS_FR.pdf) · [docx](docs/spec/fr/ECG-AI_KG_TS_FR.docx) |
 | Specification — Russian original | [pdf](docs/spec/original/ECG-AI_KG_TS_RU_original.pdf) · [docx](docs/spec/original/ECG-AI_KG_TS_RU_original.docx) |
@@ -34,7 +35,7 @@ See the [project plan](docs/PLAN.md).
 .
 ├── docs/                   Project documentation
 │   ├── PLAN.md             Project plan (phases, tasks, exit criteria)
-│   ├── OPEN_QUESTIONS.md   Questions for the author (EN + RU)
+│   ├── OPEN_QUESTIONS.md   Open questions and recorded answers (EN + RU)
 │   └── spec/               Original specification and its translations
 │       ├── original/       Russian original (.docx, .pdf)
 │       ├── en/             English translation (.md, .pdf, .docx)
@@ -43,6 +44,7 @@ See the [project plan](docs/PLAN.md).
 │   └── spec-translation/   Script that rebuilds the translated documents
 ├── temp/                   Local scratch space (git-ignored, except its README)
 ├── AGENTS.md               Working conventions for contributors and coding agents
+├── LICENSE                 Apache License 2.0
 └── README.md
 ```
 
@@ -57,12 +59,12 @@ React + PostgreSQL admin panel.
 
 ## Contributing
 
-- The repository is in **English**. The app UI will be in Kyrgyz and Russian.
+- The repository is in **English**. The app UI will be in Russian, Kyrgyz and English.
 - **Never commit patient data, real ECG photos, credentials or large datasets/model
   weights.** Public datasets are downloaded by scripts.
 - See [AGENTS.md](AGENTS.md) for conventions.
 
 ## Licence
 
-Not chosen yet (see [open questions](docs/OPEN_QUESTIONS.md)). Until a licence is added,
-all rights are reserved by the authors.
+Code and documentation: [Apache License 2.0](LICENSE). Third-party datasets and models keep
+their own licences (listed in the research notes when used).

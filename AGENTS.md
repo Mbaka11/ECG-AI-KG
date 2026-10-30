@@ -1,7 +1,10 @@
 # Working Conventions
 
 - **Language:** everything in the repo is written in English (code, comments, docs, commit
-  messages). Translated copies of the specification live in `docs/spec/<lang>/`.
+  messages). The app UI is in Russian, Kyrgyz and English. Translated copies of the
+  specification live in `docs/spec/<lang>/`.
+- **Questions:** research before asking. Only ask the author what cannot be found online;
+  contact the cardiologist only once a POC exists (see `docs/OPEN_QUESTIONS.md`).
 - **Source of truth:** `docs/spec/original/` is the author's document and is never edited.
   Changes to requirements go into a new spec version (`docs/spec/v2/`, Phase 2) with the
   reason for each change.

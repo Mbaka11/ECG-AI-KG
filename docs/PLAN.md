@@ -11,6 +11,13 @@ check facts.
 Each phase has a goal, tasks, deliverables and an exit criterion. We do not start a phase
 before the previous phase's exit criterion is met, unless stated otherwise.
 
+**Context.** This is a personal project first, to be scaled later. There is no fixed
+timeline: the 12-month roadmap in the spec is indicative only. One maintainer builds
+everything (research, ML, app, admin panel, docs); the author answers questions about the
+spec, and a cardiologist in the author's family can advise us, **once a proof of concept
+(POC) exists** (end of Phase 3). All work is in English; the app UI is in Russian, Kyrgyz
+and English.
+
 ---
 
 ## Overview
@@ -20,7 +27,7 @@ before the previous phase's exit criterion is met, unless stated otherwise.
 | 0 | Repository setup and translation | Organised repo, EN/FR spec, this plan | — |
 | 1 | Research and state of the art | Research notes + synthesis + recommendations | Phase 1 (study) |
 | 2 | Scope, requirements and design | Refined spec v2, architecture decisions, MVP scope | — |
-| 3 | ML prototype | Classifier + digitiser + end-to-end evaluation | Phase 1 (prototype) |
+| 3 | ML prototype = **POC** | Photo → signal → classification demo + evaluation | Phase 1 (prototype) |
 | 4 | Application MVP | Backend API, mobile app, offline model | Phase 2 |
 | 5 | Validation and pilot | Retrospective test on Kyrgyz ECGs, then pilot | Phase 3 |
 | 6 | MoH presentation and handover | Document package, presentation, handover | Phase 4 |
@@ -37,7 +44,7 @@ and licensing.
       as `.docx`, `.pdf` and `.md`.
 - [x] Write translation notes (abbreviations, choices) — `spec/TRANSLATION_NOTES.md`.
 - [x] Write this plan and the list of open questions for the author — `OPEN_QUESTIONS.md`.
-- [x] Publish the repository on GitHub.
+- [x] Publish the repository on GitHub (public, Apache-2.0).
 
 **Exit:** the repo is on GitHub and the team agrees on the plan.
 
@@ -51,10 +58,11 @@ products. Verify the claims and numbers in the spec, and identify what is missin
 
 All research notes go in `docs/research/` (one file per topic, sources linked).
 
-### 1.1 Clarify the brief with the author
-- Send [`OPEN_QUESTIONS.md`](OPEN_QUESTIONS.md) to the author and record the answers there.
-- Confirm goals, timeline, team, expected deliverables (code, paper, presentation) and
-  existing contacts (NCCIM, KSMA, MoH).
+### 1.1 Questions
+- Send section A of [`OPEN_QUESTIONS.md`](OPEN_QUESTIONS.md) to the author (source links,
+  "MSS KR", optional real ECG photos) and record the answers there.
+- Section B questions are answered by research (1.2, 1.3); ask only what we cannot find.
+- Section C questions wait for the cardiologist, after the POC.
 
 ### 1.2 Clinical domain (`research/01-clinical-domain.md`)
 - ECG basics needed by the team: leads, paper layouts (3×4, 6×2, 12×1, rhythm strip),
@@ -151,7 +159,7 @@ the recommendations.
 - Planned repo structure for code (to be created when needed):
   `ml/` (data, training, evaluation), `backend/`, `mobile/`, `admin/`, `docs/`.
 
-**Exit:** spec v2 + ADRs + evaluation protocol approved by the team (and the author).
+**Exit:** spec v2 + ADRs + evaluation protocol written and reviewed.
 
 ---
 
@@ -171,8 +179,12 @@ the recommendations.
 - 3.6 Report generation: rule/template engine producing urgency + patterns + action steps.
 - 3.7 Model card and methodology write-up (basis for the research paper).
 
-**Exit:** evaluation protocol from Phase 2 run end to end, results documented, decision
-on whether quality is sufficient to build the app.
+- 3.8 **POC demo** for the cardiologist: a simple way (notebook, small web page or CLI) to
+  upload a photo and see the digitised signal, detected patterns and urgency; short
+  summary of results and limitations. Then ask the section C questions.
+
+**Exit:** evaluation protocol from Phase 2 run end to end, results documented, POC shown to
+the cardiologist, decision on whether quality is sufficient to build the app.
 
 ---
 
@@ -180,9 +192,9 @@ on whether quality is sufficient to build the app.
 
 - 4.1 Backend API (FastAPI): upload, processing, results, history, auth, logging.
 - 4.2 Mobile app (Flutter): camera/gallery capture with guidance, result screen, history
-  (last 50 cases), PDF export, Kyrgyz/Russian UI (English for development).
+  (last 50 cases), PDF export, Russian / Kyrgyz / English UI.
 - 4.3 Offline mode: on-device model, sync when online.
-- 4.4 Admin panel (if in MVP scope): dashboard, facilities/users, de-identified export,
+- 4.4 Admin panel (in MVP scope): dashboard, facilities/users, de-identified export,
   cardiologist review flags.
 - 4.5 Security: TLS, RBAC, 2FA for admins, retention rules.
 - 4.6 Internal testing on 20–30 real ECG strips; usability review.
@@ -220,11 +232,10 @@ on whether quality is sufficient to build the app.
   shown.
 - **Data:** no patient data or credentials in git, ever. Public datasets are downloaded by
   scripts, not committed.
-- **Translation:** repo in English; UI in Kyrgyz and Russian; documents for the author in
-  Russian when needed.
+- **Translation:** repo in English; UI in Russian, Kyrgyz and English; messages for the
+  author in Russian when needed.
 
 ## Immediate next steps
 
-1. Review this plan and the translations.
-2. Send the open questions to the author.
-3. Start Phase 1 research notes (1.2 to 1.8 can run in parallel).
+1. Send section A of the open questions to the author.
+2. Start Phase 1 research notes (1.2 to 1.8 can run in parallel), answering section B.

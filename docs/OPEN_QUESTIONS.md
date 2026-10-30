@@ -1,88 +1,65 @@
-# Open Questions for the Author
+# Open Questions
 
-Questions raised while translating and reading the specification. Answers will be recorded
-under each question. A Russian version, ready to send, is at the bottom.
+The project idea and the specification come from the author; a cardiologist in the author's
+family can advise us. We only ask them what we cannot find ourselves, and we contact
+the cardiologist **once we have a proof of concept (POC) to show**, not before.
 
-Status legend: ⬜ open · ✅ answered · ⏸ parked
+Status legend: ⬜ open · 🔎 research first (ask only if not found) · ✅ answered
 
-## Goals and organisation
+## A. To ask the author now
 
-1. ⬜ Who is on the team, and what is each person's role? Who decides on scope changes?
-2. ⬜ What is the timeline (school year, admission deadlines, competitions)? Is the 12-month
-   roadmap fixed?
-3. ⬜ What is expected from us: research, ML prototype, full app, research paper, the MoH
-   presentation — or all of them? Which is the priority?
-4. ⬜ In which language(s) should the research paper and the MoH documents be written?
+Short list, can be sent as is (Russian version below).
 
-## Partners and clinical expertise
+1. ⬜ What does the source **"МСС КР, 2022–2026"** refer to (full name or link)?
+2. ⬜ Can you send the **links to the sources** cited in the document (European Heart
+   Journal 2024, IJMEDRI 2024, Nature 2024 and 2025, World Bank PHC report, NCCIM,
+   National Statistical Committee 2023)?
+3. ⬜ *(Optional, if easy)* Could the cardiologist share **a few photos of real paper ECG strips**,
+   fully anonymised (no name, no ID on the photo), ideally with her reading of each one?
+   Even 5–10 would help us test the POC on real Kyrgyz paper and machines.
 
-5. ⬜ Are there existing contacts at NCCIM, KSMA or the MoH KR? Is a cardiologist available
-   to advise and review clinical content?
-6. ⬜ Are the MoH KR clinical protocols (ACS, arrhythmias) available? The "action
-   algorithms" in the app must follow them.
+## B. Research first — ask only if we find nothing
 
-## Field context
+4. 🔎 Which **ECG machines** are used in FAPs/CFMs (models, number of channels, paper layout:
+   3×4, 6×2, 12×1, rhythm strip)? Can any of them export a digital file instead of paper?
+5. 🔎 Which **phones** do feldshers use (Android/iOS, typical models), and what is the
+   **internet coverage** at rural / mountain facilities?
+6. 🔎 Which **MoH KR clinical protocols** (ACS, arrhythmias) apply, and where are they
+   published? The app's action steps must follow them.
 
-7. ⬜ Which ECG machines are used in FAPs/CFMs (models, number of channels, paper layout,
-   e.g. 3×4, 6×2, 12×1)? Can any of them export a digital file instead of paper?
-8. ⬜ Which phones do feldshers use (Android/iOS, typical model), and what is the internet
-   coverage at the target sites?
-9. ⬜ Can we get sample photos of real ECG strips (anonymised) — even a few — early on?
+## C. For the cardiologist — after the POC
 
-## Data and validation
+7. ⬜ Review of the urgency mapping (🔴 / 🟡 / 🟢) and of the action steps for each target
+   pathology.
+8. ⬜ Which pathologies matter most in practice for feldshers, and which mistakes would be
+   most dangerous?
+9. ⬜ Is it possible to collect anonymised Kyrgyz ECGs with a cardiologist's reading for a
+   proper validation, and under which consent / ethics framework?
+10. ⬜ Could she introduce the project to NCCIM or KSMA later on?
 
-10. ⬜ Is there a realistic way to obtain anonymised Kyrgyz ECGs with cardiologist reports
-    for testing? Under which consent / ethics approval?
+## D. Answered
 
-## Technical choices
-
-11. ⬜ Is the proposed stack (Flutter, FastAPI, YOLOv11, CNN + BiLSTM, TensorFlow Lite,
-    React + PostgreSQL) a requirement or a suggestion? Note: Ultralytics YOLO is licensed
-    AGPL-3.0.
-12. ⬜ Is the administrative panel part of the first MVP?
-13. ⬜ Is there a budget for hosting (Google Cloud or other)?
-
-## Document details
-
-14. ⬜ What does the source "МСС КР, 2022–2026" refer to (full name / link)?
-15. ⬜ Can you share the links for the cited sources (European Heart Journal 2024, IJMEDRI
-    2024, Nature 2024/2025, World Bank PHC report, NCCIM, National Statistical Committee)?
-
-## Repository
-
-16. ⬜ Should the GitHub repository be public now or later? Which open-source licence
-    (e.g. MIT, Apache-2.0)?
+| Topic | Answer |
+|---|---|
+| Team | The maintainer builds everything; the author and the cardiologist answer questions. |
+| Nature of the project | Personal project first, scaling later. No fixed or bureaucratic timeline (the 12-month roadmap in the spec is indicative only). |
+| Deliverables | Everything is in scope: research, ML, app, admin panel, documentation, paper. |
+| Languages | Everything in English, except the app UI: Russian, Kyrgyz and English. |
+| Cardiologist | Available, but contacted only once a POC exists. |
+| Admin panel | Can be part of the MVP. |
+| Hosting | Cloud hosting is fine; the maintainer will fund it. |
+| Tech stack | The spec's stack is a suggestion; final choices are made in Phase 2 (ADRs). |
+| Repository | Public, open source under Apache-2.0. |
 
 ---
 
-## Версия на русском (для отправки)
+## Версия на русском (для отправки — раздел A)
 
-**Цели и организация**
-1. Кто входит в команду и какова роль каждого? Кто принимает решения об изменении объёма проекта?
-2. Каковы сроки (учебный год, дедлайны поступления, конкурсы)? Является ли 12-месячная дорожная карта фиксированной?
-3. Что ожидается от нас: исследование, ML-прототип, полноценное приложение, научная работа, презентация для МЗ — или всё вместе? Что в приоритете?
-4. На каком языке (языках) должны быть научная работа и документы для МЗ?
-
-**Партнёры и клиническая экспертиза**
-5. Есть ли уже контакты в НЦКиТ, КГМА или МЗ КР? Есть ли кардиолог, который может консультировать и проверять клиническое содержание?
-6. Доступны ли клинические протоколы МЗ КР (ОКС, аритмии)? «Алгоритмы действий» в приложении должны им соответствовать.
-
-**Условия на местах**
-7. Какие аппараты ЭКГ используются в ФАП/ЦСМ (модели, число каналов, формат плёнки, например 3×4, 6×2, 12×1)? Может ли какой-либо из них выгружать цифровой файл вместо бумаги?
-8. Какие телефоны у фельдшеров (Android/iOS, типичная модель) и какое покрытие интернета в целевых учреждениях?
-9. Можно ли на раннем этапе получить несколько (обезличенных) фотографий реальных ЭКГ-плёнок?
-
-**Данные и валидация**
-10. Есть ли реальная возможность получить обезличенные кыргызские ЭКГ с заключениями кардиолога для тестирования? На основании какого согласия / одобрения этического комитета?
-
-**Технические решения**
-11. Предложенный стек (Flutter, FastAPI, YOLOv11, CNN + BiLSTM, TensorFlow Lite, React + PostgreSQL) — обязательное требование или предложение? Примечание: Ultralytics YOLO распространяется по лицензии AGPL-3.0.
-12. Входит ли административная панель в первую версию MVP?
-13. Есть ли бюджет на хостинг (Google Cloud или другой)?
-
-**Детали документа**
-14. Что означает источник «МСС КР, 2022–2026» (полное название / ссылка)?
-15. Можете ли вы поделиться ссылками на цитируемые источники (European Heart Journal 2024, IJMEDRI 2024, Nature 2024/2025, отчёт Всемирного банка по ПМСП, НЦКиТ, Нацстатком)?
-
-**Репозиторий**
-16. Сделать репозиторий на GitHub публичным сейчас или позже? Какую open-source лицензию выбрать (например, MIT, Apache-2.0)?
+1. Что означает источник **«МСС КР, 2022–2026»** (полное название или ссылка)?
+2. Можешь прислать **ссылки на источники**, которые указаны в документе (European Heart
+   Journal 2024, IJMEDRI 2024, Nature 2024 и 2025, отчёт Всемирного банка по ПМСП, НЦКиТ,
+   Нацстатком 2023)?
+3. *(По возможности)* Может ли твоя мама поделиться **несколькими фотографиями настоящих
+   бумажных ЭКГ**, полностью обезличенными (без имени и данных пациента на фото), желательно
+   с её расшифровкой к каждой? Даже 5–10 штук помогут нам проверить прототип на реальной
+   кыргызской бумаге и аппаратах.

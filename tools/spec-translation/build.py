@@ -228,6 +228,8 @@ def main():
         assert not left, left
         d.core_properties.title = tr.TITLE[lang]
         d.core_properties.language = code
+        d.core_properties.author = ""
+        d.core_properties.last_modified_by = ""
         out = OUT / lang / f"ECG-AI_KG_TS_{lang.upper()}.docx"
         out.parent.mkdir(parents=True, exist_ok=True)
         d.save(out)
