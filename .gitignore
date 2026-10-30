@@ -1,0 +1,81 @@
+# --- Scratch space -------------------------------------------------------
+temp/*
+!temp/README.md
+
+# --- Data, models and patient information (never commit) ----------------
+data/
+datasets/
+*.dat
+*.hea
+*.atr
+*.edf
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.tflite
+*.safetensors
+mlruns/
+wandb/
+runs/
+patient_data/
+real_ecg_photos/
+
+# --- Secrets ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+service-account*.json
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+build/
+dist/
+
+# --- Flutter / Dart --------------------------------------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+mobile/build/
+*.iml
+
+# --- Node / web (admin panel) ---------------------------------------------
+node_modules/
+.next/
+.vite/
+coverage/
+npm-debug.log*
+yarn-error.log*
+
+# --- Office temp files -----------------------------------------------------
+~$*
+*.tmp
+
+# --- OS / editors ----------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
