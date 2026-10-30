@@ -15,8 +15,8 @@ English.
 
 ## Status
 
-**Phase 0 — repository setup and translation** (done) → next: **Phase 1 — research**.
-See the [project plan](docs/PLAN.md).
+**Phase 1 — research**: first pass done, see the [research synthesis](docs/research/00-synthesis.md).
+Next: **Phase 2 — spec v2 and design**. See the [project plan](docs/PLAN.md).
 
 ## Documents
 
@@ -24,6 +24,7 @@ See the [project plan](docs/PLAN.md).
 |---|---|
 | Project plan | [docs/PLAN.md](docs/PLAN.md) |
 | Open questions | [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) |
+| Research (Phase 1) | [synthesis](docs/research/00-synthesis.md) · [all notes](docs/research/) |
 | Specification — English | [md](docs/spec/en/ECG-AI_KG_TS_EN.md) · [pdf](docs/spec/en/ECG-AI_KG_TS_EN.pdf) · [docx](docs/spec/en/ECG-AI_KG_TS_EN.docx) |
 | Specification — French | [md](docs/spec/fr/ECG-AI_KG_TS_FR.md) · [pdf](docs/spec/fr/ECG-AI_KG_TS_FR.pdf) · [docx](docs/spec/fr/ECG-AI_KG_TS_FR.docx) |
 | Specification — Russian original | [pdf](docs/spec/original/ECG-AI_KG_TS_RU_original.pdf) · [docx](docs/spec/original/ECG-AI_KG_TS_RU_original.docx) |
@@ -36,6 +37,7 @@ See the [project plan](docs/PLAN.md).
 ├── docs/                   Project documentation
 │   ├── PLAN.md             Project plan (phases, tasks, exit criteria)
 │   ├── OPEN_QUESTIONS.md   Open questions and recorded answers (EN + RU)
+│   ├── research/           Phase 1 research notes (00-synthesis.md first)
 │   └── spec/               Original specification and its translations
 │       ├── original/       Russian original (.docx, .pdf)
 │       ├── en/             English translation (.md, .pdf, .docx)
@@ -43,6 +45,8 @@ See the [project plan](docs/PLAN.md).
 ├── tools/
 │   └── spec-translation/   Script that rebuilds the translated documents
 ├── temp/                   Local scratch space (git-ignored, except its README)
+├── .agents/skills/         Vendored agent skills (research, signal processing, ML)
+├── .pi/settings.json       Pinned agent skill packages (Anthropic, Flutter)
 ├── AGENTS.md               Working conventions for contributors and coding agents
 ├── LICENSE                 Apache License 2.0
 └── README.md

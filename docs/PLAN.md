@@ -37,7 +37,7 @@ and licensing.
 
 ---
 
-## Phase 0 — Repository setup and translation ✅ (this step)
+## Phase 0 — Repository setup and translation ✅
 
 - [x] Create the repository structure, `README.md`, `.gitignore`, `temp/` scratch folder.
 - [x] Translate the original Russian spec to English and French (same content, same layout)
@@ -50,7 +50,7 @@ and licensing.
 
 ---
 
-## Phase 1 — Research and state of the art
+## Phase 1 — Research and state of the art 🟡 (first pass done 2026-10-29)
 
 **Goal:** understand the real situation before writing code: the clinical problem, the
 local context in Kyrgyzstan, the available data, the state of the art and the existing
@@ -58,20 +58,35 @@ products. Verify the claims and numbers in the spec, and identify what is missin
 
 All research notes go in `docs/research/` (one file per topic, sources linked).
 
+**Status:** notes 01–08 and the [synthesis](research/00-synthesis.md) are written (first
+pass, each claim labelled verified / partly verified / unverified). Remaining before exit:
+answers to section A questions (above all the ECG machine model and sample strips) and the
+three maintainer decisions listed in the synthesis.
+
+**Main results** (details in the synthesis):
+- Photo → signal digitisation is the main technical risk (phone-photo SNR −1 to 12 dB in
+  the best published work); classification on clean signals is mature.
+- FAP machines are likely 3/6-channel thermal printers → rhythm findings are feasible from
+  few leads; ST/BBB claims need 12 identified leads.
+- MIT-BIH and YOLOv11 should be replaced (PTB-XL + CinC; permissive U-Net segmentation).
+- The MoH/NCCIM already plan AI-ECG and tele-ECG for FAPs; PMcardio is a regulated
+  competitor → position ECG-AI KG as an offline, RU/KY, complementary assistant.
+- The app is SaMD under KR Law 216 / EAEU rules; research framing for the POC.
+
 ### 1.1 Questions
 - Send section A of [`OPEN_QUESTIONS.md`](OPEN_QUESTIONS.md) to the author (source links,
   "MSS KR", optional real ECG photos) and record the answers there.
 - Section B questions are answered by research (1.2, 1.3); ask only what we cannot find.
 - Section C questions wait for the cardiologist, after the POC.
 
-### 1.2 Clinical domain (`research/01-clinical-domain.md`)
+### 1.2 Clinical domain (`research/01-clinical-domain.md`) ✅
 - ECG basics needed by the team: leads, paper layouts (3×4, 6×2, 12×1, rhythm strip),
   calibration (25 mm/s, 10 mm/mV), intervals (PR, QRS, QT/QTc).
 - For each MVP target pathology: ECG criteria, how urgent it is, what a feldsher should do.
 - Obtain the **MoH KR clinical protocols** (ACS, arrhythmias) the action algorithms must follow.
 - Define a first urgency mapping (🔴/🟡/🟢) to be reviewed by a cardiologist.
 
-### 1.3 Local context (`research/02-kyrgyz-context.md`)
+### 1.3 Local context (`research/02-kyrgyz-context.md`) ✅
 - Verify the statistics in the spec and find the original sources (links).
 - ECG machines actually used in FAPs/CFMs: models, number of channels, paper format,
   thermal paper quality, whether they can export digital files (which would avoid photos).
@@ -80,7 +95,7 @@ All research notes go in `docs/research/` (one file per topic, sources linked).
   projects) we should integrate with or not duplicate.
 - Languages: Kyrgyz and Russian medical terminology; who can translate clinical text.
 
-### 1.4 Data (`research/03-datasets.md`)
+### 1.4 Data (`research/03-datasets.md`) ✅
 - Review public ECG datasets, their task fit and licence:
   - MIT-BIH Arrhythmia (2-lead Holter, 48 records, beat-level labels),
   - PTB-XL (12-lead, ~21.8k records, diagnostic statements incl. MI / ST changes),
@@ -91,37 +106,38 @@ All research notes go in `docs/research/` (one file per topic, sources linked).
 - Plan for Kyrgyz data: who could provide anonymised paper ECGs with cardiologist reports,
   under which consent/ethics framework.
 
-### 1.5 State of the art — digitisation (`research/04-digitisation.md`)
+### 1.5 State of the art — digitisation (`research/04-digitisation.md`) ✅
 - ECGtizer (named in the spec) and other open-source digitisers; the top methods of the
   PhysioNet Challenge 2024; robustness to real phone photos (folds, shadows, perspective).
 - Metrics used to evaluate digitisation (e.g. SNR, correlation against the true signal).
 - Alternative: classify **directly from the image** without full digitisation — compare.
 
-### 1.6 State of the art — classification (`research/05-classification.md`)
+### 1.6 State of the art — classification (`research/05-classification.md`) ✅
 - 12-lead classification models and benchmarks (PTB-XL benchmarks, large-cohort models,
   recent ECG foundation models), CNN + BiLSTM as proposed in the spec.
 - How the 98–99.4% MIT-BIH accuracy figures were obtained (intra- vs inter-patient split;
   class imbalance) and what realistic numbers are.
 - Models small enough for on-device inference (TFLite/LiteRT, ONNX), quantisation.
 
-### 1.7 Existing products and projects (`research/06-existing-solutions.md`)
+### 1.7 Existing products and projects (`research/06-existing-solutions.md`) ✅
 - Commercial and research tools that already interpret ECG photos or 12-lead ECGs (for
   example PMcardio, Cardiologs and others — to verify), their regulatory status, what
   they do well and what they do not cover (offline use, Kyrgyz/Russian language, price).
 - What makes ECG-AI KG different and worth building.
 
-### 1.8 Regulation, ethics, privacy and licensing (`research/07-regulatory-ethics.md`)
+### 1.8 Regulation, ethics, privacy and licensing (`research/07-regulatory-ethics.md`) ✅
 - Medical device rules in the KR (including Eurasian Economic Union rules, as the KR is a
   member), whether a CDSS for triage is a medical device, what a pilot requires.
 - Research ethics approval for a pilot; informed consent; KR personal-data law.
 - Licences of planned components (e.g. Ultralytics YOLO is AGPL-3.0, which matters for a
   handover to a government partner), datasets and models.
 
-### 1.9 Synthesis (`research/00-synthesis.md`)
+### 1.9 Synthesis (`research/00-synthesis.md`) ✅
 - Summary of findings, verified/unverified claims of the spec, risks, gaps.
 - Recommendations: what to keep, change or postpone in the spec; proposed MVP scope.
 
-**Preliminary points to check** (from a first reading of the spec — not conclusions yet):
+**Preliminary points to check** (from a first reading of the spec) — all six were confirmed by
+the research; see the synthesis:
 1. MIT-BIH contains 2-lead Holter beats, not 12-lead paper ECGs, and almost no ACS/ST
    examples; ACS detection probably needs PTB-XL or larger 12-lead datasets.
 2. The accuracy target differs between the roadmap (≥ 95%) and the KPIs (≥ 97%), and plain
@@ -145,8 +161,11 @@ the recommendations.
 
 **Goal:** turn the research into concrete, realistic decisions.
 
-- Define the **MVP scope** (which pathologies, which ECG formats, online vs offline first,
-  whether the admin panel is in the MVP).
+- Define the **MVP scope** (which pathologies, which ECG formats, online vs offline first).
+  Starting proposal: [synthesis — POC scope](research/00-synthesis.md#proposed-poc-scope-phase-3).
+- Apply the spec corrections listed in the synthesis (statistics, citations, MIT-BIH,
+  YOLOv11, accuracy claim, ACS wording, "cannot interpret" state, no LLM in the report path,
+  support for 3/6-channel strips).
 - Write **spec v2** in English (`docs/spec/v2/`), keeping the original untouched; list every
   change and its reason.
 - Architecture decision records (`docs/adr/`): stack, model approach, hosting, on-device vs
@@ -154,7 +173,10 @@ the recommendations.
 - Define labels, urgency logic and the evaluation protocol (datasets, splits, metrics,
   acceptance thresholds) **before** training.
 - Clinical safety: hazard list (e.g. a missed STEMI, a bad photo accepted), mitigations,
-  mandatory disclaimers and limitations in the UI.
+  mandatory disclaimers and limitations in the UI; intended-use statement; licence/SOUP
+  table (see the phase checklist in [research 07](research/07-regulatory-ethics.md#checklist-per-phase)).
+- Small follow-up research: per-class counts in PTB-XL/CinC, licences of ACS-ECG /
+  PM-ECG-ID / ECG-Image-Database, full text of the KR AF and NSTE-ACS protocols.
 - Data management and privacy plan (what is stored, where, how long, who can access).
 - Planned repo structure for code (to be created when needed):
   `ml/` (data, training, evaluation), `backend/`, `mobile/`, `admin/`, `docs/`.
@@ -169,10 +191,14 @@ the recommendations.
 
 - 3.1 Data pipeline: download and version public datasets (not committed to git), patient-wise
   splits, preprocessing.
-- 3.2 Classification baseline on digital 12-lead signals (e.g. PTB-XL), then the CNN + BiLSTM
-  model from the spec and stronger baselines; MIT-BIH beat/rhythm model as needed.
+- 3.2 Classification baseline on digital 12-lead signals (PTB-XL official folds, external
+  test on CinC 2021 sources): XResNet1D/Inception1D baseline, the CNN + BiLSTM from the spec
+  for comparison, lead dropout and digitisation-noise augmentation; rule-based rate and
+  regularity checks as a safety net. MIT-BIH only for beat-detector checks.
 - 3.3 Digitisation: generate synthetic paper-ECG images (ECG-Image-Kit) from known signals,
-  build/adapt a digitiser, measure signal reconstruction quality; then test on real photos.
+  including short 3/6-channel strips; start from existing open digitisers (Open-ECG-Digitizer,
+  PhysioNet 2024 entries — licence decision first); measure SNR on public photo sets; then
+  test on photos we print and photograph ourselves. Compare with a direct-image classifier.
 - 3.4 End-to-end evaluation: photo → digitiser → classifier, robustness tests (lighting,
   angle, folds, resolution), image-quality check that asks for a retake.
 - 3.5 Measurements: heart rate, intervals (PR, QRS, QTc) and their error.
@@ -237,5 +263,6 @@ the cardiologist, decision on whether quality is sufficient to build the app.
 
 ## Immediate next steps
 
-1. Send section A of the open questions to the author.
-2. Start Phase 1 research notes (1.2 to 1.8 can run in parallel), answering section B.
+1. Send section A of the open questions to the author (Russian version ready).
+2. Maintainer decisions from the synthesis: CC BY-SA reuse, Android first, positioning.
+3. Start Phase 2: spec v2 + ADRs + evaluation protocol.

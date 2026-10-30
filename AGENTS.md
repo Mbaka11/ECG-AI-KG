@@ -18,4 +18,7 @@
   git. Datasets are downloaded into `data/` (git-ignored) by scripts.
 - **Clinical safety:** the system is decision support, not a diagnosis. Clinical content
   (urgency rules, action steps) must cite an official protocol or a cardiologist review.
+- **Agent skills:** project skills are in `.agents/skills/` (vendored, pinned) and
+  `.pi/settings.json` (pinned git packages). Review and pin any new third-party skill to a
+  commit; never let a skill send patient data or ECG photos to an online service.
 - **Commits:** small, descriptive, conventional style (`docs: ...`, `feat(ml): ...`).

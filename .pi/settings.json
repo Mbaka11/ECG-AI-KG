@@ -1,0 +1,29 @@
+{
+  "packages": [
+    {
+      "source": "git:github.com/anthropics/skills@ca45fc496a3436251f191354091d557da31c15b5",
+      "skills": [
+        "skills/skill-creator/SKILL.md",
+        "skills/frontend-design/SKILL.md",
+        "skills/webapp-testing/SKILL.md"
+      ],
+      "extensions": [],
+      "prompts": [],
+      "themes": []
+    },
+    {
+      "source": "git:github.com/flutter/agent-plugins@90fa51dc9d1bd6694cee226397e08ec8193e9e69",
+      "skills": [
+        "skills/flutter-setup-localization/SKILL.md",
+        "skills/flutter-apply-architecture-best-practices/SKILL.md",
+        "skills/flutter-build-responsive-layout/SKILL.md",
+        "skills/flutter-fix-layout-issues/SKILL.md",
+        "skills/flutter-add-widget-test/SKILL.md",
+        "skills/flutter-add-integration-test/SKILL.md"
+      ],
+      "extensions": [],
+      "prompts": [],
+      "themes": []
+    }
+  ]
+}
