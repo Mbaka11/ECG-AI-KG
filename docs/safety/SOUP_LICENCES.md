@@ -97,3 +97,22 @@ shown.
 - Training on non-permissive data (ODbL, GPL, NC, credentialed) needs an ADR before any
   resulting weights are shipped (ADR 0001).
 - Add a CI licence check when the app and Python code exist (Phase 4).
+
+## Update 2026-11-04: components now in use
+
+Licences read from each package's LICENSE file in the local pub cache or from pip metadata. All
+of these are permissive, so they are allowed in the product path under ADR 0001.
+
+| Component | Version | Licence | Used in | Product path |
+|---|---|---|---|---|
+| flutter_riverpod / riverpod | 3.4.3 | MIT | `mobile/` state | Allowed |
+| go_router | 18.1.3 | BSD-3-Clause | `mobile/` navigation | Allowed |
+| intl / flutter_localizations | 0.20.3 / SDK | BSD-3-Clause | `mobile/` i18n | Allowed |
+| image_picker | 1.2.4 | BSD-3-Clause | `mobile/` camera and gallery | Allowed |
+| shared_preferences | 2.5.6 | BSD-3-Clause | `mobile/` prototype case store (to be replaced by Drift) | Allowed |
+| pdf | 3.13.1 | Apache-2.0 | `mobile/` PDF report | Allowed |
+| printing | 5.15.1 | Apache-2.0 | `mobile/` share or download the PDF | Allowed |
+| Noto Sans (font) | 2022 build | SIL OFL 1.1 | `mobile/assets/fonts/` | Allowed (licence shipped in `OFL.txt`) |
+| neurokit2 | 0.3.0 | MIT | `ml/ecg_rules` R-peak detection | Allowed |
+| numpy | 2.2.6 | BSD-3-Clause | `ml/` | Allowed |
+| scipy | 1.15.3 | BSD-3-Clause | `ml/` | Allowed |
