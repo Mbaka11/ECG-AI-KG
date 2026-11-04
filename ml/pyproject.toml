@@ -1,0 +1,19 @@
+[project]
+name = "ecg-rules"
+version = "0.1.0"
+description = "Transparent rule-based rhythm safety net for single-lead ECG (decision support, not diagnosis)"
+requires-python = ">=3.10"
+dependencies = ["numpy", "scipy", "neurokit2"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["ecg_rules"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
