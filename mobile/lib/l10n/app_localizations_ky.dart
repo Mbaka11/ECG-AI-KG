@@ -252,7 +252,20 @@ class AppLocalizationsKy extends AppLocalizations {
   String get savePdf => 'Сохранить PDF';
 
   @override
-  String get pdfDemo => 'Экспорт в PDF пока не входит в демо.';
+  String get pdfReady => 'PDF готов: можно отправить или сохранить.';
+
+  @override
+  String get pdfFailed => 'Не удалось создать PDF. Попробуйте ещё раз.';
+
+  @override
+  String get usePhoneCamera => 'Камера телефона';
+
+  @override
+  String get photoDemoNote =>
+      'Демо: это фото пока не анализируется. Результат строится по выбранному ниже образцу.';
+
+  @override
+  String get demoSample => 'Демо-образец';
 
   @override
   String get urgencyRed => 'Срочно — действуйте сейчас';

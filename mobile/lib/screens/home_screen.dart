@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/ecg_case.dart';
@@ -40,9 +41,12 @@ class HomeScreen extends ConsumerWidget {
               child: _SmallAction(
                 icon: Icons.photo_library_outlined,
                 label: l.fromGallery,
-                onTap: () {
+                onTap: () async {
                   ref.read(draftProvider.notifier).reset();
-                  context.push('/new/check');
+                  final img = await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 3000);
+                  if (img == null) return;
+                  ref.read(draftProvider.notifier).setPhoto(await img.readAsBytes());
+                  if (context.mounted) context.push('/new/check');
                 },
               ),
             ),

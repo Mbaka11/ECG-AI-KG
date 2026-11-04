@@ -1,7 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/demo_cases.dart';
 import '../models/ecg_case.dart';
+import 'case_store.dart';
 
 class Settings {
   const Settings({
@@ -45,11 +48,15 @@ final settingsProvider = NotifierProvider<SettingsNotifier, Settings>(SettingsNo
 
 /// The case being captured.
 class Draft {
-  const Draft({this.scenario = Scenario.red, this.age, this.sex, this.symptoms = const {}});
+  const Draft({this.scenario = Scenario.red, this.age, this.sex, this.symptoms = const {}, this.photo});
   final Scenario scenario;
   final int? age;
   final String? sex;
   final Set<Symptom> symptoms;
+
+  /// Photo picked from the camera or gallery. Kept in memory only; the
+  /// prototype does not analyse it (results come from [scenario]).
+  final Uint8List? photo;
 
   Draft copyWith({Scenario? scenario, int? age, String? sex, Set<Symptom>? symptoms, bool clearSex = false}) =>
       Draft(
@@ -57,6 +64,7 @@ class Draft {
         age: age ?? this.age,
         sex: clearSex ? null : (sex ?? this.sex),
         symptoms: symptoms ?? this.symptoms,
+        photo: photo,
       );
 }
 
@@ -66,7 +74,10 @@ class DraftNotifier extends Notifier<Draft> {
 
   void reset() => state = Draft(scenario: state.scenario);
   void setScenario(Scenario s) => state = state.copyWith(scenario: s);
-  void setAge(int? a) => state = Draft(scenario: state.scenario, age: a, sex: state.sex, symptoms: state.symptoms);
+  void setAge(int? a) =>
+      state = Draft(scenario: state.scenario, age: a, sex: state.sex, symptoms: state.symptoms, photo: state.photo);
+  void setPhoto(Uint8List? p) =>
+      state = Draft(scenario: state.scenario, age: state.age, sex: state.sex, symptoms: state.symptoms, photo: p);
   void setSex(String? s) => state = state.copyWith(sex: s, clearSex: s == null);
   void toggleSymptom(Symptom s) {
     final next = {...state.symptoms};
@@ -78,19 +89,34 @@ class DraftNotifier extends Notifier<Draft> {
 final draftProvider = NotifierProvider<DraftNotifier, Draft>(DraftNotifier.new);
 
 class CasesNotifier extends Notifier<List<EcgCase>> {
+  final _store = CaseStore();
+
   @override
-  List<EcgCase> build() => seedHistory();
+  List<EcgCase> build() {
+    _restore();
+    return seedHistory();
+  }
+
+  Future<void> _restore() async {
+    final saved = await _store.load();
+    if (saved != null && saved.isNotEmpty) state = saved;
+  }
+
+  void _set(List<EcgCase> next) {
+    state = next.take(CaseStore.maxCases).toList();
+    _store.save(state);
+  }
 
   EcgCase addFromDraft(Draft d) {
     final c = demoCase(d.scenario).copyWith(age: d.age, sex: d.sex, symptoms: d.symptoms);
-    state = [c, ...state];
+    _set([c, ...state]);
     return c;
   }
 
   void markForwarded(String id) {
-    state = [
+    _set([
       for (final c in state) c.id == id ? c.copyWith(sync: SyncState.synced) : c,
-    ];
+    ]);
   }
 }
 

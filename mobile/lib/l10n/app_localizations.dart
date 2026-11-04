@@ -574,11 +574,35 @@ abstract class AppLocalizations {
   /// **'Save PDF'**
   String get savePdf;
 
-  /// No description provided for @pdfDemo.
+  /// No description provided for @pdfReady.
   ///
   /// In en, this message translates to:
-  /// **'PDF export is not part of this demo yet.'**
-  String get pdfDemo;
+  /// **'PDF ready to share or save.'**
+  String get pdfReady;
+
+  /// No description provided for @pdfFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the PDF. Try again.'**
+  String get pdfFailed;
+
+  /// No description provided for @usePhoneCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Use phone camera'**
+  String get usePhoneCamera;
+
+  /// No description provided for @photoDemoNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo: this photo is not analysed yet. The result uses the sample strip chosen below.'**
+  String get photoDemoNote;
+
+  /// No description provided for @demoSample.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo sample'**
+  String get demoSample;
 
   /// No description provided for @urgencyRed.
   ///

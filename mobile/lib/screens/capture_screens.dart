@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../data/demo_cases.dart';
 import '../l10n/app_localizations.dart';
@@ -86,24 +87,7 @@ class CameraScreen extends ConsumerWidget {
       ),
       body: Column(children: [
         // Demo-only sample chooser.
-        SizedBox(
-          height: 52,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            children: [
-              for (final s in Scenario.values)
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ChoiceChip(
-                    label: Text(_sampleName(l, s)),
-                    selected: s == scenario,
-                    onSelected: (_) => ref.read(draftProvider.notifier).setScenario(s),
-                  ),
-                ),
-            ],
-          ),
-        ),
+        const SampleChips(padding: EdgeInsets.symmetric(horizontal: 12)),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -140,6 +124,18 @@ class CameraScreen extends ConsumerWidget {
             }),
           ),
         ),
+        TextButton.icon(
+          style: TextButton.styleFrom(foregroundColor: Colors.white),
+          onPressed: () async {
+            final img = await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 3000);
+            if (img == null) return;
+            ref.read(draftProvider.notifier).setPhoto(await img.readAsBytes());
+            if (context.mounted) context.push('/new/check');
+          },
+          icon: const Icon(Icons.photo_camera_outlined),
+          label: Text(l.usePhoneCamera),
+        ),
+        const SizedBox(height: 8),
         SafeArea(
           minimum: const EdgeInsets.only(bottom: 24),
           child: Semantics(
@@ -165,12 +161,43 @@ class CameraScreen extends ConsumerWidget {
     );
   }
 
-  static String _sampleName(AppLocalizations l, Scenario s) => switch (s) {
+}
+
+/// Demo-only: picks which canned scenario the "analysis" returns.
+class SampleChips extends ConsumerWidget {
+  const SampleChips({super.key, this.padding = EdgeInsets.zero});
+  final EdgeInsets padding;
+
+  static String name(AppLocalizations l, Scenario s) => switch (s) {
         Scenario.red => l.sampleSt,
         Scenario.amber => l.sampleAf,
         Scenario.green => l.sampleSinus,
         Scenario.grey => l.samplePoor,
       };
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final scenario = ref.watch(draftProvider).scenario;
+    return SizedBox(
+      height: 52,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: padding,
+        children: [
+          for (final s in Scenario.values)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: ChoiceChip(
+                label: Text(name(l, s)),
+                selected: s == scenario,
+                onSelected: (_) => ref.read(draftProvider.notifier).setScenario(s),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 }
 
 class _PhotoLike extends StatelessWidget {
@@ -224,7 +251,9 @@ class QualityCheckScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final scenario = ref.watch(draftProvider).scenario;
+    final draft = ref.watch(draftProvider);
+    final scenario = draft.scenario;
+    final photo = draft.photo;
     final c = demoCase(scenario);
     final good = c.tech.quality >= 0.6;
     final t = c.tech;
@@ -235,6 +264,19 @@ class QualityCheckScreen extends ConsumerWidget {
         children: [
           Text(l.checkTitle, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
           const SizedBox(height: 12),
+          if (photo != null) ...[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(Tokens.radiusSmall),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 280),
+                child: Image.memory(photo, fit: BoxFit.contain, width: double.infinity),
+              ),
+            ),
+            NoticeBox(text: l.photoDemoNote, icon: Icons.science_outlined),
+            SectionTitle(l.demoSample, icon: Icons.science_outlined),
+            const SampleChips(),
+            const SizedBox(height: 12),
+          ],
           LayoutBuilder(
             builder: (context, box) => Transform.rotate(
               angle: -0.02,

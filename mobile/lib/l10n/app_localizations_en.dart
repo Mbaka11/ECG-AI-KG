@@ -251,7 +251,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get savePdf => 'Save PDF';
 
   @override
-  String get pdfDemo => 'PDF export is not part of this demo yet.';
+  String get pdfReady => 'PDF ready to share or save.';
+
+  @override
+  String get pdfFailed => 'Could not create the PDF. Try again.';
+
+  @override
+  String get usePhoneCamera => 'Use phone camera';
+
+  @override
+  String get photoDemoNote =>
+      'Demo: this photo is not analysed yet. The result uses the sample strip chosen below.';
+
+  @override
+  String get demoSample => 'Demo sample';
 
   @override
   String get urgencyRed => 'Urgent — act now';

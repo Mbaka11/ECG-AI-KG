@@ -18,6 +18,9 @@ class LocalText {
 
 enum Urgency { red, amber, green, grey }
 
+/// Demo scenario a case was built from (prototype only; no model runs).
+enum Scenario { red, amber, green, grey }
+
 enum SyncState { synced, pending, localOnly }
 
 class Finding {
@@ -59,6 +62,7 @@ class EcgCase {
   const EcgCase({
     required this.id,
     required this.createdAt,
+    required this.scenario,
     required this.urgency,
     required this.headline,
     required this.findings,
@@ -76,6 +80,7 @@ class EcgCase {
 
   final String id;
   final DateTime createdAt;
+  final Scenario scenario;
   final Urgency urgency;
   final LocalText headline;
   final List<Finding> findings;
@@ -103,6 +108,7 @@ class EcgCase {
       EcgCase(
         id: id ?? this.id,
         createdAt: createdAt ?? this.createdAt,
+        scenario: scenario,
         urgency: urgency,
         headline: headline,
         findings: findings,

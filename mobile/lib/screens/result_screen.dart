@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:printing/printing.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/ecg_case.dart';
+import '../services/pdf_report.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
@@ -37,7 +39,7 @@ class ResultScreen extends ConsumerWidget {
           IconButton(
             tooltip: l.savePdf,
             icon: const Icon(Icons.picture_as_pdf_outlined),
-            onPressed: () => _snack(context, l.pdfDemo),
+            onPressed: () => _exportPdf(context, c, l, lang),
           ),
         ],
       ),
@@ -196,6 +198,16 @@ class ResultScreen extends ConsumerWidget {
         ]),
       ),
     );
+  }
+
+  Future<void> _exportPdf(BuildContext context, EcgCase c, AppLocalizations l, String lang) async {
+    try {
+      final bytes = await buildCasePdf(c, l, lang);
+      await Printing.sharePdf(bytes: bytes, filename: 'ecg-ai-kg-${c.id}.pdf');
+      if (context.mounted) _snack(context, l.pdfReady);
+    } catch (_) {
+      if (context.mounted) _snack(context, l.pdfFailed);
+    }
   }
 
   void _snack(BuildContext context, String msg) =>

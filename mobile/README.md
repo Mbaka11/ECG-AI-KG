@@ -46,6 +46,17 @@ Welcome (language, research disclaimer D1) → Home → **New ECG**:
 Also: History (sync state per case), Settings (language, account, data), About (D1, D11,
 limitations). The offline/online chip on Home is a demo toggle.
 
+Working features beyond the mock-up:
+- **Photo input.** "From gallery" on Home and "Use phone camera" on the camera screen both use
+  `image_picker`. The photo appears on the check screen with a demo notice: it is not analysed
+  yet, and the result still comes from the chosen sample.
+- **PDF export.** The PDF icon on a result builds a one-page A4 report with `pdf` and
+  `printing`, then opens the share sheet on Android or downloads it on the web. The report has
+  the same content and disclaimers as the screen, a vector ECG trace, and no patient name or ID.
+  It embeds Noto Sans so Cyrillic renders.
+- **Cases kept between launches.** `state/case_store.dart` uses `shared_preferences` to keep the
+  last 50 cases. It stores metadata only, never photos.
+
 ## Design rules (from [research 11](../docs/research/11-ux-market.md) and [`docs/safety/`](../docs/safety/))
 
 - Urgency is never shown by colour alone. Each level has its own colour, icon and word, and
@@ -93,8 +104,10 @@ lib/
 
 ## Known gaps / next steps
 
-- A real camera (`camera` or a document scanner), gallery import and PDF export.
-- Local storage (Drift) and sync, per [ADR 0006](../docs/adr/0006-inference-location.md) and
+- A guided live camera with edge detection (`camera` or a document scanner). Today the app
+  uses the system camera through `image_picker`.
+- Drift (SQLite) storage with retention rules and sync, replacing the `shared_preferences`
+  prototype store, per [ADR 0006](../docs/adr/0006-inference-location.md) and
   [ADR 0007](../docs/adr/0007-app-and-backend-stack.md).
 - The model and digitiser (Phase 3). The UI already expects `TechDetails`, findings, a quality
   score and versions.
