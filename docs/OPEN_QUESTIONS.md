@@ -8,6 +8,11 @@ Status legend: ⬜ open · 🟡 partly answered · ✅ answered
 
 ## A. To ask the author now
 
+> **2026-11-04: parked.** The author could not be reached. Phase 2 continues on documented
+> assumptions (3/6-channel strips supported as first-class input; spec statistics flagged
+> as unverified). Questions stay open and are asked when the author is available; answers
+> may change spec v2.
+
 Short list, can be sent as is (Russian version below). Updated after Phase 1 research
 ([synthesis](research/00-synthesis.md)): A1 is now the most important question.
 
