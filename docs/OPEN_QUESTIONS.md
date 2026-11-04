@@ -29,6 +29,9 @@ A3. ⬜ Can you send the **links to the sources** in the document? Several could
 A4. ⬜ Do you know whether the MoH's **"Digital FAP" kits (SberMedAI)** or the **NCCIM tele-ECG**
    programme have actually reached FAPs? *(Only if known — it helps us position the app as
    complementary.)*
+A5. ⬜ The AF protocol (MoH order No. 626, 2024) has a reference list headed "Uzbekistan 2024".
+   Is it an adaptation of an Uzbek protocol, and is it the version in force? *(From
+   [research 10](research/10-kr-protocols.md).)*
 
 ## B. Research first — ask only if we find nothing
 
@@ -56,6 +59,9 @@ C5. ⬜ Which drugs and equipment FAPs actually have (aspirin, heparin, thrombol
     shapes the action steps.
 C6. ⬜ Which ethics committee would review a retrospective study on anonymised ECGs, and a
     later pilot?
+C7. ⬜ What is a feldsher allowed to do at first contact (aspirin, nitrates, heparin, morphine,
+    thrombolysis, cardioversion)? The KR protocols do not say; the action steps depend on it.
+    *(From [research 10](research/10-kr-protocols.md).)*
 
 ## D. Answered
 
