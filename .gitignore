@@ -3,7 +3,7 @@ temp/*
 !temp/README.md
 
 # --- Data, models and patient information (never commit) ----------------
-data/
+/data/
 datasets/
 *.dat
 *.hea
