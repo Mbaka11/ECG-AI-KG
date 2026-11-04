@@ -157,29 +157,36 @@ the recommendations.
 
 ---
 
-## Phase 2 — Scope, requirements and design
+## Phase 2 — Scope, requirements and design 🟡
 
 **Goal:** turn the research into concrete, realistic decisions.
 
-- Define the **MVP scope** (which pathologies, which ECG formats, online vs offline first).
-  Starting proposal: [synthesis — POC scope](research/00-synthesis.md#proposed-poc-scope-phase-3).
-- Apply the spec corrections listed in the synthesis (statistics, citations, MIT-BIH,
-  YOLOv11, accuracy claim, ACS wording, "cannot interpret" state, no LLM in the report path,
-  support for 3/6-channel strips).
-- Write **spec v2** in English (`docs/spec/v2/`), keeping the original untouched; list every
-  change and its reason.
-- Architecture decision records (`docs/adr/`): stack, model approach, hosting, on-device vs
-  server inference.
-- Define labels, urgency logic and the evaluation protocol (datasets, splits, metrics,
-  acceptance thresholds) **before** training.
-- Clinical safety: hazard list (e.g. a missed STEMI, a bad photo accepted), mitigations,
-  mandatory disclaimers and limitations in the UI; intended-use statement; licence/SOUP
-  table (see the phase checklist in [research 07](research/07-regulatory-ethics.md#checklist-per-phase)).
-- Small follow-up research: per-class counts in PTB-XL/CinC, licences of ACS-ECG /
-  PM-ECG-ID / ECG-Image-Database, full text of the KR AF and NSTE-ACS protocols.
-- Data management and privacy plan (what is stored, where, how long, who can access).
-- Planned repo structure for code (to be created when needed):
-  `ml/` (data, training, evaluation), `backend/`, `mobile/`, `admin/`, `docs/`.
+**Status (2026-11-04):** drafts exist for the spec v2 change log, ADRs 0001–0007, the evaluation
+protocol, the safety documents and the data management plan. Not done: the spec v2 body, the
+MVP scope decision, the cardiologist review, the hosting decision (open, ADR 0007).
+
+- [ ] Define the **MVP scope** (which pathologies, which ECG formats, online vs offline first).
+      Starting proposal: [synthesis — POC scope](research/00-synthesis.md#proposed-poc-scope-phase-3).
+- [ ] Apply the spec corrections listed in the synthesis (statistics, citations, MIT-BIH,
+      YOLOv11, accuracy claim, ACS wording, "cannot interpret" state, no LLM in the report path,
+      support for 3/6-channel strips). *(Listed in the [change log](spec/v2/CHANGELOG.md); not yet applied in a spec body.)*
+- [ ] Write **spec v2** in English (`docs/spec/v2/`), keeping the original untouched; list every
+      change and its reason. *(Change log done: [CHANGELOG.md](spec/v2/CHANGELOG.md); spec v2 body not yet written.)*
+- [x] Architecture decision records (`docs/adr/`): stack, model approach, hosting, on-device vs
+      server inference. *(ADRs 0001–0007, status proposed/accepted; hosting decision still open in ADR 0007.)*
+- [x] Define labels, urgency logic and the evaluation protocol (datasets, splits, metrics,
+      acceptance thresholds) **before** training. *([Protocol v0.1](eval/PROTOCOL.md); thresholds set after baseline; label mapping and urgency mapping pending cardiologist review.)*
+- [x] Clinical safety: hazard list (e.g. a missed STEMI, a bad photo accepted), mitigations,
+      mandatory disclaimers and limitations in the UI; intended-use statement; licence/SOUP
+      table (see the phase checklist in [research 07](research/07-regulatory-ethics.md#checklist-per-phase)).
+      *(Drafts in [`docs/safety/`](safety/), pending cardiologist review.)*
+- [x] Small follow-up research: per-class counts in PTB-XL/CinC, licences of ACS-ECG /
+      PM-ECG-ID / ECG-Image-Database, full text of the KR AF and NSTE-ACS protocols.
+      *([Research 09](research/09-dataset-followup.md) and [10](research/10-kr-protocols.md).)*
+- [x] Data management and privacy plan (what is stored, where, how long, who can access).
+      *([Draft v0.1](privacy/DATA_MANAGEMENT_PLAN.md); open questions P1–P9.)*
+- [ ] Planned repo structure for code (to be created when needed):
+      `ml/` (data, training, evaluation), `backend/`, `mobile/`, `admin/`, `docs/`.
 
 **Exit:** spec v2 + ADRs + evaluation protocol written and reviewed.
 
