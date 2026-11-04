@@ -215,6 +215,8 @@ MVP scope decision, the cardiologist review, the hosting decision (open, ADR 000
 - 3.8 **POC demo** for the cardiologist: a simple way (notebook, small web page or CLI) to
   upload a photo and see the digitised signal, detected patterns and urgency; short
   summary of results and limitations. Then ask the section C questions.
+  Review material for the cardiologist: [clinical review package](clinical/REVIEW_PACKAGE.md)
+  (EN, reference) and [RU copy](clinical/REVIEW_PACKAGE_RU.md).
 
 **Exit:** evaluation protocol from Phase 2 run end to end, results documented, POC shown to
 the cardiologist, decision on whether quality is sufficient to build the app.
@@ -231,6 +233,8 @@ the cardiologist, decision on whether quality is sufficient to build the app.
   cardiologist review flags.
 - 4.5 Security: TLS, RBAC, 2FA for admins, retention rules.
 - 4.6 Internal testing on 20–30 real ECG strips; usability review.
+  Usability review follows the [formative usability test plan](usability/TEST_PLAN.md)
+  (3–5 feldshers/nurses, hazard H-06).
 
 **Exit:** MVP installable on a mid-range Android phone and meeting the performance targets.
 
