@@ -151,3 +151,23 @@ Pretrained-model licences and training-data terms (e.g. whether weights trained 
 | ECG plot | `CustomPainter` (+ `fl_chart` for small charts) | n/a / popular | — / MIT (verify) |
 | PDF | `pdf`, `printing` | Active (`printing` 5.15.1) | Apache-2.0 |
 | Avoid | `isar`, `hive`, `tflite_flutter` (new code), Syncfusion charts | Stale / WIP / licence limits | — |
+
+
+---
+
+## Update 2026-11-04: UI skills
+
+Search for agent skills covering Flutter UI, Material 3, accessibility, i18n and UX design. Commit SHAs were read from the cloned repos on 2026-11-04. The official skills already pinned in `.pi/settings.json` (`flutter/agent-plugins@90fa51d`, BSD-3-Clause; repo HEAD is now `b7d5a0b`) cover responsive layout, layout fixes, localisation, architecture and tests, but contain no dedicated Material 3 theming, accessibility or design-system skill. `anthropics/skills` (`ca45fc4`) has `frontend-design`, `theme-factory`, `canvas-design`, `brand-guidelines`, all web/graphics-oriented and not Flutter-specific.
+
+| Candidate | Licence | Commit | What it does | Risks | Decision |
+|---|---|---|---|---|---|
+| [zakariaf/Flutter-Skills](https://github.com/zakariaf/Flutter-Skills) `accessibility-as-code` | MIT | `e073e5e` | Semantics, 44 px targets, text scale, contrast, non-colour state, reduced motion | None found (SKILL.md only). Opinionated | **Vendored** |
+| same, `design-system-structure` | MIT | `e073e5e` | Token tiers, ThemeExtension, hand-authored light/dark ColorScheme, bundled fonts, reduced motion | Local grep scripts only; bans `fromSeed`/`google_fonts` (fits offline use) | **Vendored** |
+| same, `i18n-rtl-l10n` | MIT | `e073e5e` | gen-l10n/ARB parity, ICU plurals, directional geometry, numerals | Local scripts only; much RTL content irrelevant to ru/ky/en | **Vendored** |
+| same, `adaptive-layout`, `widget-golden-and-a11y-testing` | MIT | `e073e5e` | Window size classes; a11y/overflow/golden tests | Local scripts only | Not vendored (overlaps official layout/test skills); candidate for Phase 4 |
+| [flutter/agent-plugins](https://github.com/flutter/agent-plugins) (mirror `flutter/skills`) | BSD-3-Clause | `b7d5a0b` (pinned `90fa51d`) | Official Flutter/Dart skills incl. `flutter-add-widget-preview` | Official; no network use observed in skill text (scripts not re-audited) | Already loaded via pi; consider adding `flutter-add-widget-preview` |
+| [dhruvanbhalara/skills](https://github.com/dhruvanbhalara/skills) (`flutter-ui`, `flutter-testing`) | MIT | `a74a6fb` | Community Flutter/Dart skills, partly copies of official ones | Not read in detail; includes Firebase/Isar skills we avoid | Skipped |
+| [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT | `ccce51c` | Searchable UX style/palette/font database, Flutter stack CSV, ~3.8 MB, ~145k stars | Python search scripts and CLI; web-first aesthetics, recommends Google Fonts (runtime fetch); heavy; popularity is not an audit | Skipped |
+| Accessibility skills found (`Intopia/intopia-web-accessibility-skill` licence "other"; `mgifford/accessibility-skills` AGPL-3.0; Swift/Apple ones) | mixed | not read | Web or Apple platforms | Unclear or copyleft licence, wrong platform | Skipped |
+
+Vendored into `.agents/skills/`: `accessibility-as-code`, `design-system-structure`, `i18n-rtl-l10n` (copies, commit `e073e5ea10c963d2c52ab1e423bd314c28a56154`, recorded in `.agents/skills/README.md`). Caveats: single-maintainer community repo (64 stars, created 2026), so it is less vetted than the official skills; the rules are strict opinions, not Flutter requirements; none of it replaces WCAG review or the clinical-safety rule. Nothing found sends data online. No dedicated Material 3 or generic UX-design skill of acceptable quality was found.
