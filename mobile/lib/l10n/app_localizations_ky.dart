@@ -63,6 +63,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get seeAll => 'Показать все';
 
   @override
+  String get noCases => 'Случаев пока нет. Здесь появятся ваши ЭКГ.';
+
+  @override
   String get online => 'В сети';
 
   @override

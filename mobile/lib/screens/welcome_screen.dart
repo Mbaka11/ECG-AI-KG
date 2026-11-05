@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
+import '../widgets/common.dart';
 import '../widgets/ecg_trace.dart';
 import 'settings_screen.dart' show LanguagePicker;
 
@@ -26,64 +27,71 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
+          padding: const EdgeInsets.fromLTRB(Tokens.s5 - 4, Tokens.s5, Tokens.s5 - 4, Tokens.s5),
           children: [
-            Row(children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                    color: Tokens.brand, borderRadius: BorderRadius.circular(14)),
-                child: const Icon(Icons.monitor_heart_outlined, color: Colors.white, size: 28),
+            const Align(alignment: Alignment.centerLeft, child: Wordmark()),
+            const SizedBox(height: Tokens.s5),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Tokens.radiusLarge),
+                border: Border.all(color: const Color(0xFFF1C9C6)),
               ),
-              const SizedBox(width: 12),
-              Text('ECG-AI KG', style: t.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
-            ]),
-            const SizedBox(height: 24),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(Tokens.radius),
-              child: const SizedBox(
-                height: 110,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: NeverScrollableScrollPhysics(),
-                  child: EcgPaper(rhythm: DemoRhythm.sinus, seconds: 5, pxPerMm: 3.4, heightMm: 32),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(Tokens.radiusLarge - 1),
+                child: const SizedBox(
+                  height: 110,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: NeverScrollableScrollPhysics(),
+                    child: EcgPaper(rhythm: DemoRhythm.sinus, seconds: 5, pxPerMm: 3.4, heightMm: 32),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-            Text(l.welcomeTitle, style: t.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
-            const SizedBox(height: 8),
-            Text(l.welcomeBody, style: t.bodyLarge),
-            const SizedBox(height: 24),
+            const SizedBox(height: Tokens.s5),
+            Text(l.welcomeTitle, style: t.headlineSmall),
+            const SizedBox(height: Tokens.s2),
+            Text(l.welcomeBody, style: t.bodyLarge?.copyWith(color: Tokens.inkMuted)),
+            const SizedBox(height: Tokens.s5),
             Text(l.chooseLanguage, style: t.titleMedium),
-            const SizedBox(height: 8),
+            const SizedBox(height: Tokens.s2),
             const LanguagePicker(),
-            const SizedBox(height: 24),
-            Card(
-              color: const Color(0xFFFFF8E6),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Row(children: [
-                    const Icon(Icons.science_outlined),
-                    const SizedBox(width: 8),
-                    Expanded(child: Text(l.researchTitle, style: t.titleMedium)),
-                  ]),
-                  const SizedBox(height: 8),
-                  Text(l.disclaimerFirstLaunch, style: t.bodyMedium),
+            const SizedBox(height: Tokens.s5),
+            Container(
+              padding: const EdgeInsets.all(Tokens.s4),
+              decoration: BoxDecoration(
+                color: Tokens.research,
+                borderRadius: BorderRadius.circular(Tokens.radius),
+                border: Border.all(color: Tokens.caution.withValues(alpha: 0.35)),
+              ),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(children: [
+                  const Icon(Icons.science_outlined, color: Tokens.caution),
+                  const SizedBox(width: Tokens.s2),
+                  Expanded(child: Text(l.researchTitle, style: t.titleMedium?.copyWith(fontWeight: FontWeight.w700))),
                 ]),
+                const SizedBox(height: Tokens.s2),
+                Text(l.disclaimerFirstLaunch, style: t.bodyMedium?.copyWith(fontSize: 16)),
+              ]),
+            ),
+            const SizedBox(height: Tokens.s3),
+            // The whole row is the tap target for the acknowledgement.
+            Material(
+              color: _agree ? Tokens.brandSoft : Tokens.card,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Tokens.radius),
+                side: BorderSide(color: _agree ? Tokens.brand : Tokens.control, width: 1.5),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: CheckboxListTile(
+                value: _agree,
+                onChanged: (v) => setState(() => _agree = v ?? false),
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: const EdgeInsets.symmetric(horizontal: Tokens.s2),
+                title: Text(l.iUnderstand, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600)),
               ),
             ),
-            const SizedBox(height: 12),
-            CheckboxListTile(
-              value: _agree,
-              onChanged: (v) => setState(() => _agree = v ?? false),
-              controlAffinity: ListTileControlAffinity.leading,
-              contentPadding: EdgeInsets.zero,
-              title: Text(l.iUnderstand),
-            ),
-            const SizedBox(height: 12),
+            const SizedBox(height: Tokens.s4),
             FilledButton(
               onPressed: _agree
                   ? () {

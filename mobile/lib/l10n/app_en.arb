@@ -17,6 +17,7 @@
   "howToPhoto": "How to take a photo",
   "recentCases": "Recent",
   "seeAll": "See all",
+  "noCases": "No cases yet. Your ECGs will appear here.",
   "online": "Online",
   "offline": "Offline",
   "offlineHint": "The app works the same without internet. Cases are sent when the phone is online.",

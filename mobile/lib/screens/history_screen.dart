@@ -19,17 +19,25 @@ class HistoryScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l.history)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        padding: Tokens.pagePadding,
         children: [
-          NoticeBox(text: l.historyHint, icon: Icons.phone_android),
-          const SizedBox(height: 16),
-          for (final c in cases) ...[CaseTile(c: c), const SizedBox(height: 8)],
+          Row(children: [
+            const Icon(Icons.phone_android, size: 18, color: Tokens.inkMuted),
+            const SizedBox(width: Tokens.s2),
+            Expanded(
+                child: Text(l.historyHint, style: const TextStyle(fontSize: 14, color: Tokens.inkMuted))),
+          ]),
+          const SizedBox(height: Tokens.s4),
+          if (cases.isEmpty)
+            Card(child: EmptyState(icon: Icons.monitor_heart_outlined, text: l.noCases)),
+          for (final c in cases) ...[CaseTile(c: c), const SizedBox(height: Tokens.s2)],
         ],
       ),
     );
   }
 }
 
+/// One case in a list: urgency colour + icon + word, headline, date, patient, sync state.
 class CaseTile extends ConsumerWidget {
   const CaseTile({super.key, required this.c});
   final EcgCase c;
@@ -49,26 +57,34 @@ class CaseTile extends ConsumerWidget {
       SyncState.localOnly => (Icons.phone_android, l.syncLocal),
     };
     return Card(
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
-        borderRadius: BorderRadius.circular(Tokens.radius),
         onTap: () => context.push('/case/${c.id}'),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.fromLTRB(Tokens.s3, Tokens.s3, Tokens.s2, Tokens.s3),
           child: Row(children: [
             UrgencyChip(urgency: c.urgency),
-            const SizedBox(width: 12),
+            const SizedBox(width: Tokens.s3),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                UrgencyTag(urgency: c.urgency),
+                const SizedBox(height: 2),
                 Text(c.headline.of(lang),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 4),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, height: 1.3)),
+                const SizedBox(height: Tokens.s1),
                 Text([when, if (who.isNotEmpty) who].join(' · '),
-                    style: TextStyle(fontSize: 13, color: Colors.black.withValues(alpha: 0.6))),
+                    style: const TextStyle(fontSize: 13, color: Tokens.inkMuted)),
               ]),
             ),
-            Tooltip(message: syncText, child: Icon(syncIcon, size: 20, color: Colors.black54)),
+            Tooltip(
+              message: syncText,
+              child: Padding(
+                padding: const EdgeInsets.all(Tokens.s2),
+                child: Icon(syncIcon, size: 20, color: Tokens.inkMuted, semanticLabel: syncText),
+              ),
+            ),
           ]),
         ),
       ),

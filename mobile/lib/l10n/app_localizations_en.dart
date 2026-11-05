@@ -63,6 +63,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get seeAll => 'See all';
 
   @override
+  String get noCases => 'No cases yet. Your ECGs will appear here.';
+
+  @override
   String get online => 'Online';
 
   @override
