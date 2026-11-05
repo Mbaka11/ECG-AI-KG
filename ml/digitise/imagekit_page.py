@@ -23,11 +23,18 @@ DEFAULT_DIR = REPO_ROOT.parent / "ECG-AI_KG" / "data" / "third_party" / "ECG-Dig
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
         sys.exit(__doc__)
-    out_dir = Path(argv[0]).resolve()
-    records = [Path(r).resolve() for r in argv[1:]]
+    render_pages(Path(argv[0]), [Path(r) for r in argv[1:]])
+    return 0
+
+
+def render_pages(out_dir: Path, records: list[Path]) -> list[Path]:
+    """Render each WFDB record (path without extension) to OUT_DIR/<record name>.png."""
+    out_dir = out_dir.resolve()
+    records = [r.resolve() for r in records]
     gen_dir = Path(os.environ.get("ECG_DIGITISER_DIR", DEFAULT_DIR)).resolve() / "ecg-image-generator"
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    cwd = os.getcwd()
     os.chdir(gen_dir)  # the generator loads fonts and templates from relative paths
     sys.path.insert(0, str(gen_dir))
     from scipy.stats import bernoulli  # noqa: PLC0415
@@ -36,6 +43,7 @@ def main(argv: list[str]) -> int:
     from helper_functions import read_config_file  # noqa: PLC0415
 
     configs = read_config_file(str(gen_dir / "config.yaml"))
+    pages: list[Path] = []
     for rec in records:
         files = get_paper_ecg(
             input_file=str(rec) + ".dat",
@@ -58,8 +66,10 @@ def main(argv: list[str]) -> int:
             # Name the page after the record so the digitiser output matches the ground truth.
             dst = out_dir / f"{rec.name}.png"
             shutil.move(f, dst)
+            pages.append(dst)
             print("page", dst)
-    return 0
+    os.chdir(cwd)
+    return pages
 
 
 if __name__ == "__main__":
