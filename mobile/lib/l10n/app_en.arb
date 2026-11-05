@@ -1,0 +1,178 @@
+{
+  "@@locale": "en",
+  "navHome": "Home",
+  "history": "History",
+  "settings": "Settings",
+  "welcomeTitle": "ECG reading help",
+  "welcomeBody": "Take a photo of a paper ECG. The app shows how urgent it may be and what to do next. It works without internet.",
+  "chooseLanguage": "Language",
+  "researchTitle": "Research prototype",
+  "disclaimerFirstLaunch": "Research prototype. Decision support for a trained health worker. Not a diagnosis. Does not replace clinical judgement or a cardiologist.",
+  "iUnderstand": "I understand",
+  "start": "Start",
+  "homeGreeting": "What do you need?",
+  "newEcg": "New ECG",
+  "newEcgSub": "Take a photo of the strip",
+  "fromGallery": "From gallery",
+  "howToPhoto": "How to take a photo",
+  "recentCases": "Recent",
+  "seeAll": "See all",
+  "online": "Online",
+  "offline": "Offline",
+  "offlineHint": "The app works the same without internet. Cases are sent when the phone is online.",
+  "historyHint": "Cases are kept on this phone (last 50).",
+  "syncSynced": "Sent",
+  "syncPending": "Waiting for internet",
+  "syncLocal": "Only on this phone",
+  "sexF": "Woman",
+  "sexM": "Man",
+  "guideTitle": "Before the photo",
+  "tipFlat": "Paper flat",
+  "tipFlatSub": "Smooth out folds. Put it on a table.",
+  "tipLight": "Good light, no shadow",
+  "tipLightSub": "Daylight is best. Avoid flash glare.",
+  "tipWhole": "Whole strip in the frame",
+  "tipWholeSub": "Include the edges and the printed text.",
+  "tipAbove": "Phone straight above",
+  "tipAboveSub": "Hold the phone parallel to the paper.",
+  "openCamera": "Open camera",
+  "cameraHint": "Fit the strip inside the frame",
+  "takePhoto": "Take photo",
+  "sampleSt": "Demo: ST",
+  "sampleAf": "Demo: AF",
+  "sampleSinus": "Demo: sinus",
+  "samplePoor": "Demo: poor photo",
+  "checkTitle": "Check the photo",
+  "overlayLegend": "Blue line: what the app read from the paper",
+  "qualityGood": "Photo quality is good.",
+  "qualityPoor": "The photo is hard to read. Please retake it.",
+  "detected": "Detected",
+  "paperSpeed": "Paper speed",
+  "gain": "Gain",
+  "leadsFound": "Leads found",
+  "layout": "Layout",
+  "notFound": "not found",
+  "correctValues": "Values wrong? Correct them",
+  "retake": "Retake",
+  "usePhoto": "Continue",
+  "patientTitle": "About the patient",
+  "patientSub": "Optional, but it makes the advice safer.",
+  "symptomsQ": "Symptoms now",
+  "symChestPain": "Chest pain",
+  "symBreathless": "Short of breath",
+  "symFainting": "Fainting",
+  "symPalpitations": "Palpitations",
+  "symWeakness": "Weakness, dizziness",
+  "sex": "Sex",
+  "age": "Age",
+  "ageUnder40": "Under 40",
+  "age40to64": "40–64",
+  "age65plus": "65+",
+  "noNameNote": "No name or ID is needed. Do not photograph the patient's name.",
+  "analyse": "Analyse",
+  "analysing": "Analysing…",
+  "onDevice": "On this phone, no internet needed",
+  "procPhoto": "Straightening the photo",
+  "procTrace": "Reading the trace",
+  "procRhythm": "Checking rhythm and patterns",
+  "procReport": "Preparing advice",
+  "result": "Result",
+  "done": "Done",
+  "savePdf": "Save PDF",
+  "pdfReady": "PDF ready to share or save.",
+  "pdfFailed": "Could not create the PDF. Try again.",
+  "usePhoneCamera": "Use phone camera",
+  "photoDemoNote": "Demo: this photo is not analysed yet. The result uses the sample strip chosen below.",
+  "demoSample": "Demo sample",
+  "urgencyRed": "Urgent — act now",
+  "urgencyAmber": "Needs a doctor's review",
+  "urgencyGreen": "No urgent pattern",
+  "urgencyGrey": "No result",
+  "whatToDo": "What to do",
+  "findings": "What the app found",
+  "suspected": "suspected",
+  "ecgTrace": "ECG (lead II)",
+  "highlightLegend": "Highlighted: where the pattern was found",
+  "technical": "Check these values",
+  "imageQuality": "Image quality",
+  "caseId": "Case",
+  "sendToExpert": "Send to an expert",
+  "sendShort": "Send",
+  "send": "Send",
+  "cancel": "Cancel",
+  "forwardConsent": "The ECG photo, the result, age and sex will be sent to the expert centre. No name is sent. The patient has agreed.",
+  "forwardSent": "Sent to the expert centre.",
+  "forwardQueued": "No internet. It will be sent automatically when online.",
+  "disclaimerResult": "Not a diagnosis. A green result does not exclude disease. If the patient is unwell, act per protocol and call for help.",
+  "noticeRhythmOnly": "Only rhythm was assessed. Heart attack signs and bundle branch blocks cannot be assessed from this strip.",
+  "noticeAf": "Suspected atrial fibrillation. Confirmation needs an ECG of more than 30 s and a clinician.",
+  "noticeAcs": "An ECG alone cannot exclude acute coronary syndrome; troponin and clinical assessment are needed.",
+  "pendingReview": "pending cardiologist review",
+  "language": "Language",
+  "kyDraftNote": "Kyrgyz translation is not ready yet; Russian text is shown.",
+  "account": "Account",
+  "dataAndPrivacy": "Data and privacy",
+  "about": "About the app",
+  "showIntro": "Show the introduction again",
+  "whatWeStore": "What is stored",
+  "dataText": "On this phone: the ECG photo, the result, age group, sex and symptoms for the last 50 cases. No names or ID numbers. A case leaves the phone only when you send it to an expert. On the server, photos are deleted after 30 days.",
+  "limitations": "Limitations",
+  "limitationsText": "Not yet tested on Kyrgyz ECG paper. May miss emergencies. Photo quality affects the result. Short strips allow only rhythm assessment.",
+  "bpm": "{n}/min",
+  "@bpm": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ageYears": "{n} y",
+  "@ageYears": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pendingSync": "{n, plural, =1{1 case is waiting for internet} other{{n} cases are waiting for internet}}",
+  "@pendingSync": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "stepOf": "Step {a} of {b}",
+  "@stepOf": {
+    "placeholders": {
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      }
+    }
+  },
+  "symptomsOverride": "Symptoms reported: {list}. The patient may need urgent care whatever the ECG shows — act per protocol.",
+  "@symptomsOverride": {
+    "placeholders": {
+      "list": {
+        "type": "String"
+      }
+    }
+  },
+  "versions": "App {app} · Model {model} · Protocol texts {date}",
+  "@versions": {
+    "placeholders": {
+      "app": {
+        "type": "String"
+      },
+      "model": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  }
+}
