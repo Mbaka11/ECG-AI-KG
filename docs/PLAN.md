@@ -206,6 +206,11 @@ MVP scope decision, the cardiologist review, the hosting decision (open, ADR 000
   including short 3/6-channel strips; start from existing open digitisers (Open-ECG-Digitizer,
   PhysioNet 2024 entries — licence decision first); measure SNR on public photo sets; then
   test on photos we print and photograph ourselves. Compare with a direct-image classifier.
+  *Progress 2026-11-04 (PRs #3, #4): PhysioNet 2024 winner (ECG-Digitiser, BSD-2) runs
+  locally, inference only; synthetic ECG-Image-Kit pages from PTB-XL give SNR median 12.5 dB.
+  First end-to-end check on 12 LITFL web images found 2 under-triage errors, so a plausibility
+  gate is needed before field use ([`ml/digitise/README.md`](../ml/digitise/README.md)).
+  Next: phone photos of printed PTB-XL pages.*
 - 3.4 End-to-end evaluation: photo → digitiser → classifier, robustness tests (lighting,
   angle, folds, resolution), image-quality check that asks for a retake.
 - 3.5 Measurements: heart rate, intervals (PR, QRS, QTc) and their error.
