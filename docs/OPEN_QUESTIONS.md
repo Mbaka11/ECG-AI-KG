@@ -16,7 +16,7 @@ Status legend: ⬜ open · 🟡 partly answered · ✅ answered
 Short list, can be sent as is (Russian version below). Updated after Phase 1 research
 ([synthesis](research/00-synthesis.md)): A1 is now the most important question.
 
-A1. ⬜ **Which ECG machine is used** at the FAPs/CFMs you know (brand/model, or a photo of the
+A1. 🟡 *(2026-11-04: partly answered. The author confirms that at their facility the ECG is printed on paper. Still unknown: machine model, number of channels, paper width, sample strips. The author also suggested the LITFL ECG Library as a source of real ECG images: see [research 12](research/12-litfl-ecg-library.md).)* **Which ECG machine is used** at the FAPs/CFMs you know (brand/model, or a photo of the
    machine), how many channels it prints (1, 3, 6 or 12), and the paper width? Could the
    cardiologist share **5–10 photos of real paper ECGs**, fully anonymised (no name or ID
    visible), ideally with her reading of each? *(Public tenders suggest 3-channel thermal
