@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
+import '../widgets/common.dart';
 import '../widgets/ecg_trace.dart';
 import 'settings_screen.dart' show LanguagePicker;
 
@@ -59,6 +60,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
             Text(l.chooseLanguage, style: t.titleMedium),
             const SizedBox(height: 8),
             const LanguagePicker(),
+            if (ref.watch(settingsProvider).lang == 'ky')
+              NoticeBox(text: l.kyDraftNote, icon: Icons.translate),
             const SizedBox(height: 24),
             Card(
               color: const Color(0xFFFFF8E6),
