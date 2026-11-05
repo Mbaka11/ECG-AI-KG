@@ -1,10 +1,10 @@
 {
     "name": "ecg_ai_kg",
-    "short_name": "ecg_ai_kg",
+    "short_name": "ECG-AI KG",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
+    "background_color": "#1D4E89",
+    "theme_color": "#1D4E89",
     "description": "ECG-AI KG app prototype",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,

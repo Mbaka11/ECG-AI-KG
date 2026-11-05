@@ -116,3 +116,4 @@ of these are permissive, so they are allowed in the product path under ADR 0001.
 | neurokit2 | 0.3.0 | MIT | `ml/ecg_rules` R-peak detection | Allowed |
 | numpy | 2.2.6 | BSD-3-Clause | `ml/` | Allowed |
 | scipy | 1.15.3 | BSD-3-Clause | `ml/` | Allowed |
+| Pillow | 9.3.0 | MIT-CMU (HPND, permissive) | `mobile/tool/gen_icons.py`, draws the launcher and web icons. Dev tool only, not shipped in the app | Allowed |
