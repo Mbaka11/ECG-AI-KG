@@ -7,6 +7,7 @@ dependencies = ["numpy", "scipy", "neurokit2"]
 
 [project.optional-dependencies]
 dev = ["pytest"]
+eval = ["requests", "beautifulsoup4"]
 # image -> rules glue (ml/digitise); the digitiser itself runs in its own venv, see ml/digitise/README.md
 digitise = ["wfdb"]
 
