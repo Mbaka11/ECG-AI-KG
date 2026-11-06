@@ -32,6 +32,8 @@ S = {
  "howToPhoto": ("How to take a photo", "Как фотографировать", "Кантип сүрөткө тартуу керек"),
  "recentCases": ("Recent", "Последние", "Акыркылар"),
  "seeAll": ("See all", "Показать все", "Баарын көрүү"),
+ "noCases": ("No cases yet. Your ECGs will appear here.", "Случаев пока нет. Здесь появятся ваши ЭКГ.",
+             "Азырынча учурлар жок. Сиздин ЭКГлар ушул жерде пайда болот."),
  "online": ("Online", "В сети", "Интернет бар"),
  "offline": ("Offline", "Без сети", "Интернет жок"),
  "offlineHint": ("The app works the same without internet. Cases are sent when the phone is online.",

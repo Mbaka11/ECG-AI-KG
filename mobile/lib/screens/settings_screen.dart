@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../state/app_state.dart';
+import '../theme/tokens.dart';
 import '../widgets/common.dart';
 
 class LanguagePicker extends ConsumerWidget {
@@ -32,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l.settings)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        padding: Tokens.pagePadding,
         children: [
           SectionTitle(l.language, icon: Icons.translate),
           const LanguagePicker(),
@@ -41,7 +42,7 @@ class SettingsScreen extends ConsumerWidget {
           Card(
             child: Column(children: [
               ListTile(leading: const Icon(Icons.person_outline), title: Text(s.userName)),
-              const Divider(height: 1),
+              const Divider(),
               ListTile(leading: const Icon(Icons.local_hospital_outlined), title: Text(s.facility)),
             ]),
           ),
@@ -54,7 +55,7 @@ class SettingsScreen extends ConsumerWidget {
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => context.push('/about'),
               ),
-              const Divider(height: 1),
+              const Divider(),
               ListTile(
                 leading: const Icon(Icons.restart_alt),
                 title: Text(l.showIntro),
@@ -80,12 +81,14 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l.about)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        padding: Tokens.pagePadding,
         children: [
-          Text('ECG-AI KG', style: t.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
+          const SizedBox(height: Tokens.s2),
+          const Wordmark(markSize: 52, fontSize: 24),
+          const SizedBox(height: Tokens.s2),
           Text(l.versions('0.1.0-demo', 'none (demo)', '2026-11-04'), style: t.bodySmall),
-          const SizedBox(height: 12),
-          NoticeBox(text: l.disclaimerFirstLaunch, icon: Icons.science_outlined),
+          const SizedBox(height: Tokens.s1),
+          NoticeBox(text: l.disclaimerFirstLaunch, icon: Icons.science_outlined, tone: Tokens.caution, strong: true),
           SectionTitle(l.whatWeStore, icon: Icons.storage_outlined),
           Text(l.dataText, style: t.bodyLarge),
           SectionTitle(l.limitations, icon: Icons.report_outlined),

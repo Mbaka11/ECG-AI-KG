@@ -37,16 +37,15 @@ class PatientScreen extends ConsumerWidget {
     final n = ref.read(draftProvider.notifier);
     final ages = [(l.ageUnder40, 35), (l.age40to64, 55), (l.age65plus, 72)];
     return Scaffold(
-      appBar: AppBar(title: Text(l.stepOf(4, 4))),
+      appBar: AppBar(title: Text(l.stepOf(4, 4)), bottom: const StepProgress(step: 4)),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+        padding: Tokens.pagePadding,
         children: [
-          Text(l.patientTitle,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
-          const SizedBox(height: 4),
-          Text(l.patientSub),
+          Text(l.patientTitle, style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: Tokens.s1),
+          Text(l.patientSub, style: const TextStyle(fontSize: 16, color: Tokens.inkMuted)),
           SectionTitle(l.symptomsQ, icon: Icons.sick_outlined),
-          Wrap(spacing: 8, runSpacing: 8, children: [
+          Wrap(spacing: Tokens.s2, runSpacing: Tokens.s2, children: [
             for (final s in Symptom.values)
               FilterChip(
                 avatar: Icon(symptomIcon(s), size: 20),
@@ -74,12 +73,12 @@ class PatientScreen extends ConsumerWidget {
             selected: {if (d.age != null) d.age!},
             onSelectionChanged: (v) => n.setAge(v.isEmpty ? null : v.first),
           ),
-          const SizedBox(height: 16),
-          NoticeBox(text: l.noNameNote, icon: Icons.lock_outline),
+          const SizedBox(height: Tokens.s5),
+          NoticeBox(text: l.noNameNote, icon: Icons.lock_outline, tone: Tokens.inkMuted),
         ],
       ),
       bottomNavigationBar: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+        minimum: const EdgeInsets.fromLTRB(Tokens.s4, Tokens.s2, Tokens.s4, Tokens.s4),
         child: FilledButton.icon(
           icon: const Icon(Icons.analytics_outlined),
           onPressed: () => context.push('/new/processing'),
@@ -128,36 +127,76 @@ class _ProcessingScreenState extends ConsumerState<ProcessingScreen> {
     final steps = [l.procPhoto, l.procTrace, l.procRhythm, l.procReport];
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(width: 56, height: 56, child: CircularProgressIndicator(strokeWidth: 5)),
-              const SizedBox(height: 24),
-              Text(l.analysing,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700)),
-              const SizedBox(height: 4),
-              Text(l.onDevice),
-              const SizedBox(height: 24),
-              for (var i = 0; i < steps.length; i++)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(children: [
-                    Icon(
-                      i < _step ? Icons.check_circle : (i == _step ? Icons.radio_button_checked : Icons.radio_button_unchecked),
-                      color: i <= _step ? Tokens.brand : Colors.black26,
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(Tokens.s5),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 440),
+              child: Column(
+                children: [
+                  // Determinate ring: one quarter per step, so the wait has a visible end.
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(end: (_step + 1) / steps.length),
+                    duration: const Duration(milliseconds: 500),
+                    builder: (context, v, _) => SizedBox(
+                      width: 112,
+                      height: 112,
+                      child: Stack(alignment: Alignment.center, children: [
+                        SizedBox.expand(
+                          child: CircularProgressIndicator(
+                            value: v,
+                            strokeWidth: 7,
+                            strokeCap: StrokeCap.round,
+                            backgroundColor: Tokens.brandSoft,
+                          ),
+                        ),
+                        const Icon(Icons.monitor_heart_outlined, color: Tokens.brand, size: 44),
+                      ]),
                     ),
-                    const SizedBox(width: 12),
-                    Text(steps[i],
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: i <= _step ? Tokens.ink : Colors.black45,
-                            fontWeight: i == _step ? FontWeight.w600 : FontWeight.w400)),
+                  ),
+                  const SizedBox(height: Tokens.s5),
+                  Text(l.analysing, style: Theme.of(context).textTheme.headlineSmall, textAlign: TextAlign.center),
+                  const SizedBox(height: Tokens.s2),
+                  Row(mainAxisSize: MainAxisSize.min, children: [
+                    const Icon(Icons.phone_android, size: 18, color: Tokens.inkMuted),
+                    const SizedBox(width: Tokens.s1 + 2),
+                    Flexible(
+                      child: Text(l.onDevice,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 15, color: Tokens.inkMuted)),
+                    ),
                   ]),
-                ),
-            ],
+                  const SizedBox(height: Tokens.s5),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: Tokens.s4, vertical: Tokens.s2),
+                      child: Column(children: [
+                        for (var i = 0; i < steps.length; i++)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: Tokens.s2 + 2),
+                            child: Row(children: [
+                              Icon(
+                                i < _step
+                                    ? Icons.check_circle
+                                    : (i == _step ? Icons.radio_button_checked : Icons.radio_button_unchecked),
+                                color: i <= _step ? Tokens.brand : Tokens.inkMuted,
+                              ),
+                              const SizedBox(width: Tokens.s3),
+                              Expanded(
+                                child: Text(steps[i],
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        color: i <= _step ? Tokens.ink : Tokens.inkMuted,
+                                        fontWeight: i == _step ? FontWeight.w700 : FontWeight.w400)),
+                              ),
+                            ]),
+                          ),
+                      ]),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

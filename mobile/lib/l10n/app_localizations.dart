@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// **'See all'**
   String get seeAll;
 
+  /// No description provided for @noCases.
+  ///
+  /// In en, this message translates to:
+  /// **'No cases yet. Your ECGs will appear here.'**
+  String get noCases;
+
   /// No description provided for @online.
   ///
   /// In en, this message translates to:

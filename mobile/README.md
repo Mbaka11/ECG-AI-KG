@@ -75,9 +75,12 @@ Urgency tokens in `lib/theme/tokens.dart`:
 | Red | `#B3261E` | white |
 | Amber | `#FFC107` | `#1F1F1F` |
 | Green | `#1B6E3C` | white |
-| Grey | outlined `#5F6368` | `#3C4043` |
+| Grey | dashed outline `#5F6368`, fill `#ECEEF1` | `#3C4043` |
 
 All colour pairs are WCAG AA or better. The tokens are proposals, pending cardiologist review.
+Spacing, shape and neutral colour tokens, with their contrast ratios, are listed in
+[`docs/design/README.md`](../docs/design/README.md#tokens-mobilelibthemetokensdart). The app icon is
+drawn by `tool/gen_icons.py` (Pillow, dev only).
 
 ## Languages
 
@@ -114,8 +117,9 @@ lib/
   [ADR 0007](../docs/adr/0007-app-and-backend-stack.md).
 - The model and digitiser (Phase 3). The UI already expects `TechDetails`, findings, a quality
   score and versions.
-- Partial adherence to the vendored `design-system-structure` skill. Some raw colours are
-  still in widgets, and there is no dark theme yet.
+- Partial adherence to the vendored `design-system-structure` skill. Most colours are tokens
+  since design v2, but the ECG paper and a few tints are still raw values, and there is no
+  dark theme yet.
 - A native medical review of the Kyrgyz draft, and a review of all clinical text by a
   cardiologist.
 - Usability test with 3–5 feldshers (IEC 62366-lite, hazard H-06).

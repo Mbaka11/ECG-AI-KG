@@ -63,6 +63,10 @@ class AppLocalizationsKy extends AppLocalizations {
   String get seeAll => 'Баарын көрүү';
 
   @override
+  String get noCases =>
+      'Азырынча учурлар жок. Сиздин ЭКГлар ушул жерде пайда болот.';
+
+  @override
   String get online => 'Интернет бар';
 
   @override
