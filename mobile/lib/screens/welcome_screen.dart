@@ -56,6 +56,10 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
             Text(l.chooseLanguage, style: t.titleMedium),
             const SizedBox(height: Tokens.s2),
             const LanguagePicker(),
+            if (ref.watch(settingsProvider).lang == 'ky') ...[
+              const SizedBox(height: Tokens.s3),
+              NoticeBox(text: l.kyDraftNote, icon: Icons.translate),
+            ],
             const SizedBox(height: Tokens.s5),
             Container(
               padding: const EdgeInsets.all(Tokens.s4),

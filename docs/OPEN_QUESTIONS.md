@@ -62,6 +62,8 @@ C6. ⬜ Which ethics committee would review a retrospective study on anonymised 
 C7. ⬜ What is a feldsher allowed to do at first contact (aspirin, nitrates, heparin, morphine,
     thrombolysis, cardioversion)? The KR protocols do not say; the action steps depend on it.
     *(From [research 10](research/10-kr-protocols.md).)*
+C8. ⬜ Can she, or a Kyrgyz-speaking colleague with a medical background, review the Kyrgyz
+    UI draft? *(Procedure and uncertain terms: [KY_REVIEW](translation/KY_REVIEW.md).)*
 
 ## D. Answered
 

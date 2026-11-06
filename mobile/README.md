@@ -89,8 +89,11 @@ so all three files always have the same keys. After editing the table, run
 `python tool/gen_arb.py lib/l10n`.
 
 - **Russian and English** are complete.
-- **Kyrgyz** is a placeholder holding the Russian text, marked in the ARB. It needs a native
-  medical translator. Machine-translating clinical text is not allowed.
+- **Kyrgyz** is a machine-drafted **draft** for native review, marked in the ARB
+  (`@@x-status`) and in the app (a notice on the welcome and settings screens). It must not be
+  used in the field until a native Kyrgyz speaker with a medical background has reviewed it.
+  Glossary, uncertain strings and the review procedure:
+  [`docs/translation/KY_REVIEW.md`](../docs/translation/KY_REVIEW.md).
 
 ## Structure
 
@@ -117,5 +120,6 @@ lib/
 - Partial adherence to the vendored `design-system-structure` skill. Most colours are tokens
   since design v2, but the ECG paper and a few tints are still raw values, and there is no
   dark theme yet.
-- The Kyrgyz translation and a review of all clinical text by a cardiologist.
+- A native medical review of the Kyrgyz draft, and a review of all clinical text by a
+  cardiologist.
 - Usability test with 3–5 feldshers (IEC 62366-lite, hazard H-06).

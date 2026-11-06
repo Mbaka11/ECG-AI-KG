@@ -233,6 +233,8 @@ the cardiologist, decision on whether quality is sufficient to build the app.
 - 4.1 Backend API (FastAPI): upload, processing, results, history, auth, logging.
 - 4.2 Mobile app (Flutter): camera/gallery capture with guidance, result screen, history
   (last 50 cases), PDF export, Russian / Kyrgyz / English UI.
+  Kyrgyz UI is a machine draft pending native medical review
+  ([`translation/KY_REVIEW.md`](translation/KY_REVIEW.md)).
 - 4.3 Offline mode: on-device model, sync when online.
 - 4.4 Admin panel (in MVP scope): dashboard, facilities/users, de-identified export,
   cardiologist review flags.

@@ -353,7 +353,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get kyDraftNote =>
-      'Перевод на кыргызский ещё не готов; показан русский текст.';
+      'Перевод на кыргызский — черновик. Медицинский специалист его ещё не проверил. Если сомневаетесь, сверьтесь с русским текстом.';
 
   @override
   String get account => 'Учётная запись';

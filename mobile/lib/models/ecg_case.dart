@@ -2,7 +2,8 @@ import '../widgets/ecg_trace.dart';
 
 /// Text in several languages. Clinical content is data, not UI strings: it will
 /// come from a versioned, reviewed content table (hazards H-07, H-08).
-/// Kyrgyz falls back to Russian until a native translator reviews it.
+/// Kyrgyz is a machine draft pending native medical review (docs/translation/KY_REVIEW.md);
+/// it falls back to Russian when missing.
 class LocalText {
   const LocalText(this.en, this.ru, [this.ky]);
   final String en;

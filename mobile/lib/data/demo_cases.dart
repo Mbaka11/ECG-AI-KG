@@ -6,6 +6,8 @@ import '../widgets/ecg_trace.dart';
 /// Clinical texts: short paraphrases of the KR MoH protocols summarised in
 /// docs/research/10-kr-protocols.md. No drug doses are shown (hazard H-07).
 /// Every step is "pending cardiologist review" until OPEN_QUESTIONS C1/C7 are answered.
+/// Kyrgyz texts (third LocalText argument) are a machine draft pending native medical
+/// review; see docs/translation/KY_REVIEW.md.
 
 const _stemi = 'KR MoH STEMI protocol, order 1342 (2024)';
 const _nsteacs = 'KR NSTE-ACS protocol (2022), pre-hospital stage';
@@ -29,28 +31,33 @@ EcgCase demoCase(Scenario s, {DateTime? at, String? id}) {
         headline: const LocalText(
           'Possible acute ischaemia (heart attack pattern)',
           'Возможная острая ишемия (признаки инфаркта)',
+          'Курч ишемия болушу мүмкүн (инфаркттын белгилери)',
         ),
         findings: const [
           Finding(
-            LocalText('ST elevation pattern', 'Подъём сегмента ST'),
-            detail: LocalText('Seen in leads II, III, aVF', 'В отведениях II, III, aVF'),
+            LocalText('ST elevation pattern', 'Подъём сегмента ST', 'ST сегментинин көтөрүлүшү'),
+            detail: LocalText('Seen in leads II, III, aVF', 'В отведениях II, III, aVF', 'II, III, aVF отведениелеринде'),
           ),
-          Finding(LocalText('Sinus rhythm, 74/min', 'Синусовый ритм, 74/мин'), suspected: false),
+          Finding(LocalText('Sinus rhythm, 74/min', 'Синусовый ритм, 74/мин', 'Синус ритми, 74/мүн'), suspected: false),
         ],
         steps: const [
           ActionStep(
               LocalText('Arrange urgent transfer to a hospital with a cardiology unit now. Every minute counts.',
-                  'Срочно организуйте перевод в стационар с кардиологическим отделением. Важна каждая минута.'),
+                  'Срочно организуйте перевод в стационар с кардиологическим отделением. Важна каждая минута.',
+                  'Кардиология бөлүмү бар ооруканага шашылыш жеткирүүнү азыр уюштуруңуз. Ар бир мүнөт маанилүү.'),
               _stemi),
           ActionStep(
-              LocalText('Send this ECG to an expert now.', 'Отправьте эту ЭКГ эксперту прямо сейчас.'), _adr3),
+              LocalText('Send this ECG to an expert now.', 'Отправьте эту ЭКГ эксперту прямо сейчас.',
+                  'Бул ЭКГны экспертке азыр жөнөтүңүз.'), _adr3),
           ActionStep(
               LocalText('Check pulse, blood pressure, breathing rate and SpO₂.',
-                  'Контролируйте пульс, АД, частоту дыхания и SpO₂.'),
+                  'Контролируйте пульс, АД, частоту дыхания и SpO₂.',
+                  'Пульсту, кан басымын, дем алуу жыштыгын жана SpO₂ текшериңиз.'),
               _nsteacs),
           ActionStep(
               LocalText('Give medicines only as your protocol and training allow.',
-                  'Назначайте препараты только согласно протоколу и вашим полномочиям.'),
+                  'Назначайте препараты только согласно протоколу и вашим полномочиям.',
+                  'Дарыларды протоколго жана ыйгарым укугуңузга ылайык гана бериңиз.'),
               _nsteacs),
         ],
         tech: const TechDetails(speedMmS: 25, gainMmMv: 10, leadsFound: 12, layout: '3×4 + II', quality: 0.86),
@@ -65,28 +72,33 @@ EcgCase demoCase(Scenario s, {DateTime? at, String? id}) {
         rhythm: DemoRhythm.af,
         heartRate: 108,
         highlights: const [(0, 10)],
-        headline: const LocalText('Suspected atrial fibrillation', 'Подозрение на фибрилляцию предсердий'),
+        headline: const LocalText('Suspected atrial fibrillation', 'Подозрение на фибрилляцию предсердий',
+            'Фибрилляция предсердий болушу мүмкүн'),
         findings: const [
           Finding(
-            LocalText('Irregular rhythm, no clear P waves', 'Нерегулярный ритм, нет чётких зубцов P'),
-            detail: LocalText('Ventricular rate about 108/min', 'ЧСС около 108/мин'),
+            LocalText('Irregular rhythm, no clear P waves', 'Нерегулярный ритм, нет чётких зубцов P',
+                'Ритм бир калыпта эмес, P тиштери так көрүнбөйт'),
+            detail: LocalText('Ventricular rate about 108/min', 'ЧСС около 108/мин', 'ЧСС болжол менен 108/мүн'),
           ),
         ],
         steps: const [
           ActionStep(
               LocalText(
                   'Check for danger signs: fainting, low blood pressure, chest pain, rate over 180/min. If present, treat as an emergency.',
-                  'Проверьте признаки опасности: обморок, низкое АД, боль в груди, ЧСС более 180/мин. При их наличии — действуйте как при неотложном состоянии.'),
+                  'Проверьте признаки опасности: обморок, низкое АД, боль в груди, ЧСС более 180/мин. При их наличии — действуйте как при неотложном состоянии.',
+                  'Коркунучтуу белгилерди текшериңиз: эсинен тануу, кан басымы төмөн, көкүрөктөгү оору, ЧСС 180/мүн ашык. Алар болсо, шашылыш абалдагыдай аракет кылыңыз.'),
               _af),
           ActionStep(
               LocalText('If no danger signs: refer to a doctor or cardiologist to confirm the diagnosis.',
-                  'Если признаков опасности нет — направьте к врачу или кардиологу для подтверждения диагноза.'),
+                  'Если признаков опасности нет — направьте к врачу или кардиологу для подтверждения диагноза.',
+                  'Коркунучтуу белгилер жок болсо, диагнозду тастыктоо үчүн дарыгерге же кардиологго жөнөтүңүз.'),
               _af),
           ActionStep(
               LocalText('If the machine allows, record a longer strip (more than 30 seconds).',
-                  'Если аппарат позволяет, запишите более длинную ленту (более 30 секунд).'),
+                  'Если аппарат позволяет, запишите более длинную ленту (более 30 секунд).',
+                  'Аппарат мүмкүндүк берсе, узунураак лента жазыңыз (30 секунддан ашык).'),
               _af),
-          ActionStep(LocalText('Send the ECG to an expert.', 'Отправьте ЭКГ эксперту.'), _adr3),
+          ActionStep(LocalText('Send the ECG to an expert.', 'Отправьте ЭКГ эксперту.', 'ЭКГны экспертке жөнөтүңүз.'), _adr3),
         ],
         tech: const TechDetails(speedMmS: 25, gainMmMv: 10, leadsFound: 3, layout: '3-channel strip', quality: 0.78),
         extraNotices: const [Notice.afConfirm, Notice.rhythmOnly],
@@ -99,18 +111,21 @@ EcgCase demoCase(Scenario s, {DateTime? at, String? id}) {
         urgency: Urgency.green,
         rhythm: DemoRhythm.sinus,
         heartRate: 72,
-        headline: const LocalText('No urgent pattern found', 'Неотложных изменений не найдено'),
+        headline: const LocalText('No urgent pattern found', 'Неотложных изменений не найдено',
+            'Шашылыш өзгөрүү табылган жок'),
         findings: const [
-          Finding(LocalText('Sinus rhythm, 72/min', 'Синусовый ритм, 72/мин'), suspected: false),
+          Finding(LocalText('Sinus rhythm, 72/min', 'Синусовый ритм, 72/мин', 'Синус ритми, 72/мүн'), suspected: false),
         ],
         steps: const [
           ActionStep(
               LocalText('This does not exclude heart disease. Decide based on the patient’s condition.',
-                  'Это не исключает заболевание сердца. Решение принимайте по состоянию пациента.'),
+                  'Это не исключает заболевание сердца. Решение принимайте по состоянию пациента.',
+                  'Бул жүрөк оорусун жокко чыгарбайт. Бейтаптын абалына жараша чечим кабыл алыңыз.'),
               _safety),
           ActionStep(
               LocalText('If symptoms continue or get worse, repeat the ECG and contact a doctor.',
-                  'Если симптомы сохраняются или усиливаются, повторите ЭКГ и свяжитесь с врачом.'),
+                  'Если симптомы сохраняются или усиливаются, повторите ЭКГ и свяжитесь с врачом.',
+                  'Симптомдор басылбаса же күчөсө, ЭКГны кайталап, дарыгерге кайрылыңыз.'),
               _safety),
         ],
         tech: const TechDetails(speedMmS: 25, gainMmMv: 10, leadsFound: 12, layout: '3×4 + II', quality: 0.91),
@@ -125,23 +140,28 @@ EcgCase demoCase(Scenario s, {DateTime? at, String? id}) {
         urgency: Urgency.grey,
         rhythm: DemoRhythm.noisy,
         highlights: const [(3.2, 4.6)],
-        headline: const LocalText('Cannot interpret this photo', 'Не удалось расшифровать фото'),
+        headline: const LocalText('Cannot interpret this photo', 'Не удалось расшифровать фото',
+            'Бул сүрөттү чечмелөөгө мүмкүн болгон жок'),
         findings: const [
-          Finding(LocalText('Part of the trace is missing', 'Часть записи не видна'), suspected: false),
-          Finding(LocalText('Paper gain not readable', 'Не удалось определить усиление'), suspected: false),
+          Finding(LocalText('Part of the trace is missing', 'Часть записи не видна', 'Жазуунун бир бөлүгү көрүнбөйт'), suspected: false),
+          Finding(LocalText('Paper gain not readable', 'Не удалось определить усиление',
+                  'Күчөтүүнү аныктоого мүмкүн болгон жок'), suspected: false),
         ],
         steps: const [
           ActionStep(
               LocalText('Retake the photo: paper flat, good light, whole strip in the frame.',
-                  'Переснимите: лента ровная, хорошее освещение, вся лента в кадре.'),
+                  'Переснимите: лента ровная, хорошее освещение, вся лента в кадре.',
+                  'Кайра тартыңыз: лента түз, жарык жакшы, лента толугу менен кадрда.'),
               _safety),
           ActionStep(
               LocalText('If it still fails, record a new ECG or send it to an expert.',
-                  'Если не получается — запишите ЭКГ заново или отправьте эксперту.'),
+                  'Если не получается — запишите ЭКГ заново или отправьте эксперту.',
+                  'Дагы эле болбосо, ЭКГны кайра жазыңыз же экспертке жөнөтүңүз.'),
               _safety),
           ActionStep(
               LocalText('If the patient is unwell, act per protocol now. Do not wait for the app.',
-                  'Если пациенту плохо — действуйте по протоколу сейчас, не ждите приложения.'),
+                  'Если пациенту плохо — действуйте по протоколу сейчас, не ждите приложения.',
+                  'Бейтаптын абалы начар болсо, азыр эле протокол боюнча аракет кылыңыз. Колдонмону күтпөңүз.'),
               _safety),
         ],
         tech: const TechDetails(speedMmS: 25, gainMmMv: null, leadsFound: 1, layout: 'unknown', quality: 0.31),

@@ -763,7 +763,7 @@ abstract class AppLocalizations {
   /// No description provided for @kyDraftNote.
   ///
   /// In en, this message translates to:
-  /// **'Kyrgyz translation is not ready yet; Russian text is shown.'**
+  /// **'Kyrgyz translation is a draft. A medical reviewer has not checked it yet. If in doubt, check the Russian text.'**
   String get kyDraftNote;
 
   /// No description provided for @account.
