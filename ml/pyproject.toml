@@ -8,13 +8,15 @@ dependencies = ["numpy", "scipy", "neurokit2"]
 [project.optional-dependencies]
 dev = ["pytest"]
 eval = ["requests", "beautifulsoup4"]
+# image -> rules glue (ml/digitise); the digitiser itself runs in its own venv, see ml/digitise/README.md
+digitise = ["wfdb"]
 
 [build-system]
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["ecg_rules"]
+packages = ["ecg_rules", "digitise"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
