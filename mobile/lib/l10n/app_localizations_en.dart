@@ -349,7 +349,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get kyDraftNote =>
-      'Kyrgyz translation is not ready yet; Russian text is shown.';
+      'Kyrgyz translation is a draft. A medical reviewer has not checked it yet. If in doubt, check the Russian text.';
 
   @override
   String get account => 'Account';

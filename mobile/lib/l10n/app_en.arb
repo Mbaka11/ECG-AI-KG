@@ -109,7 +109,7 @@
   "noticeAcs": "An ECG alone cannot exclude acute coronary syndrome; troponin and clinical assessment are needed.",
   "pendingReview": "pending cardiologist review",
   "language": "Language",
-  "kyDraftNote": "Kyrgyz translation is not ready yet; Russian text is shown.",
+  "kyDraftNote": "Kyrgyz translation is a draft. A medical reviewer has not checked it yet. If in doubt, check the Russian text.",
   "account": "Account",
   "dataAndPrivacy": "Data and privacy",
   "about": "About the app",
