@@ -22,7 +22,7 @@ python eval/litfl_crawl.py all          # crawl (cached) -> download -> index
 python eval/litfl_crawl.py index        # only regenerate litfl_index.csv
 ```
 
-Default data dir is `D:\Projects\ECG-AI_KG\data\litfl` (`--data-dir` to change): `cache/`
+Default data dir is `<repo>/data/litfl` (`--data-dir` to change): `cache/`
 (HTML), `images/`, `litfl_raw.csv` (full crawl metadata). Politeness: descriptive User-Agent,
 at least 2 s between requests, HTML cached, hard cap of 450 requests per run. robots.txt
 (read in a browser, because plain HTTP clients get a bot-challenge 403) only disallows

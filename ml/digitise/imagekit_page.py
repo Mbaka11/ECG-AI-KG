@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_DIR = REPO_ROOT.parent / "ECG-AI_KG" / "data" / "third_party" / "ECG-Digitiser"
+DEFAULT_DIR = REPO_ROOT / "data" / "third_party" / "ECG-Digitiser"
 
 
 def main(argv: list[str]) -> int:

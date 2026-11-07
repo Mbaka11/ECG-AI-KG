@@ -34,7 +34,7 @@ MAX_IMAGES = 200
 DISALLOWED = ("/wp-admin/",)
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_DATA = Path(r"D:\Projects\ECG-AI_KG\data\litfl")
+DEFAULT_DATA = Path(__file__).resolve().parents[2] / "data" / "litfl"
 LABEL_SOURCE = "litfl page title/caption \u2014 teaching label, not reference standard"
 
 TARGETS = {
