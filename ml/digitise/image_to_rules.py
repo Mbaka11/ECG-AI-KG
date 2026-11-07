@@ -28,7 +28,7 @@ import wfdb
 from ecg_rules.aggregate import assess
 
 HERE = Path(__file__).resolve().parent
-DATA_ROOT = HERE.parents[2] / "data"
+DATA_ROOT = HERE.parents[1] / "data"
 DEFAULT_PY = DATA_ROOT / "third_party" / "venv-digitiser" / "Scripts" / "python.exe"
 
 
