@@ -20,7 +20,7 @@ Related: [ADR 0006 inference location](../adr/0006-inference-location.md),
 ## Executive summary
 
 - **The current 12-lead digitiser cannot run on a typical Kyrgyz phone without training a new
-  model.** It has 113.5 M parameters, 454 MB in fp32 (project measurement). A rough count
+  model.** It has 59.2 M parameters, 226 MB in fp32 (project measurement; see the correction below). A rough count
   gives about 300 GMAC or more per 1024x1280 patch and roughly 0.8-1 GB of fp32 working memory
   (computed, lower bound). Budget Android phones have 3-8 GB RAM, and most use MediaTek Helio or
   Unisoc chips. LiteRT's NPU support does not cover those chips. INT8 quantisation needs no
@@ -118,23 +118,25 @@ the average browsing device (Researcher inference). The benchmark should therefo
 |---|---|---|---|
 | Capture, page detection, blur/glare checks | Classic CV (OpenCV), ms per frame | No | Phone (Verified as standard practice in [04](04-digitisation.md) s5) |
 | Hough rotation | Classic CV | No | Phone or server |
-| nnU-Net segmentation (113.5 M params, 454 MB fp32, patch 1024x1280, 13 classes) | ~300 GMAC per patch or more (computed lower bound, see note); 15-30 s per image on an RTX 3060 Ti (project measurement) | - | Server or laptop. On a phone only after training a smaller model (section 3) |
+| nnU-Net segmentation (59.2 M params, 226 MB fp32, patch 1024x1280, 13 classes) | ~300 GMAC per patch or more (computed lower bound, see note); 15-30 s per image on an RTX 3060 Ti (project measurement) | - | Server or laptop. On a phone only after training a smaller model (section 3) |
 | Vectorisation (mask to signal) | Classic numpy/Python | No | Server. On a phone only after porting from Python to Dart/Kotlin (or using Chaquopy) |
 | Rhythm safety net (NeuroKit2 rules) | Tiny | No | Anywhere. NeuroKit2 is Python, so the phone needs a port or an embedded Python runtime. [Chaquopy](https://github.com/chaquo/chaquopy) is MIT on GitHub (Partly verified). |
 | 12-lead classifier (future, 1D CNN, a few MB) | Tens of ms on phones ([05](05-classification.md)) | No | Phone |
 
 Note on the compute estimate (computed): a 9-stage 2D U-Net with features 32-64-128-256-512x5,
 two 3x3 convolutions per stage and 2x2 transposed convolutions comes to about 300 GMAC per
-1024x1280 patch and about 59 M parameters. The measured 113.5 M parameters means the real network
-has more weights, mostly in the low-resolution stages. Those stages add few MACs, so 300 GMAC is a
-lower bound. One 32-channel fp32 feature map at full patch size is 168 MB. Counting the skip
+1024x1280 patch and about 59 M parameters. The measured 59.2 M parameters match this count, so the 300 GMAC estimate is close to the real
+cost, not just a lower bound. One 32-channel fp32 feature map at full patch size is 168 MB. Counting the skip
 connections, peak working memory is probably 0.8-1 GB in fp32 (computed, rough).
 
-Parameter count (project measurement, resolved): the checkpoint's state dict has 448 tensors
-totalling 160.7 M values, but 144 of them (`decoder.encoder.*`) are the encoder again, because
-the nnU-Net decoder keeps a reference to the encoder. Without those duplicates the network has
-**113.5 M parameters = 454 MB in fp32**, which matches the 475 MB checkpoint file (the rest is
-optimizer state and metadata, saved with shared storage).
+Parameter count (project measurement, corrected 2026-11-07): the checkpoint's state dict has 448
+tensors totalling 160.7 M values, but they share storage: the nnU-Net decoder keeps a reference to
+the encoder (`decoder.encoder.*`), so the encoder is listed twice. Counting unique storages, the
+network has **59.2 M parameters = 226 MB in fp32**. The 453 MB `checkpoint_final.pth` file holds
+those weights plus the SGD optimiser state (another 59.2 M values) and metadata. An earlier
+version of this note said 113.5 M parameters; that was wrong (it was based on a miscounted
+number and was never checked against the file size). Measured with `torch.load` on
+`checkpoint_final.pth` (epoch 1000) and `checkpoint_best.pth` (epoch 989), both with the same count.
 
 The 15-30 s GPU time is long for one forward pass. It probably includes sliding-window tiles,
 test-time mirroring and possibly a fold ensemble, plus vectorisation (Researcher inference). nnU-Net
@@ -323,7 +325,7 @@ hybrid (option E) and plan E6.
 
 | # | Question | Who / how |
 |---|---|---|
-| Q1 | MACs and test-time settings (folds, mirroring, tile step) of the shipped model (parameter count resolved: 113.5 M) | Measure (E2) |
+| Q1 | MACs and test-time settings (folds, mirroring, tile step) of the shipped model (parameter count resolved: 59.2 M) | Measure (E2) |
 | Q2 | Which phones do feldshers actually carry (RAM, chipset, Android version)? Are work phones provided? | Author, then a short field survey |
 | Q3 | Do the MoH "Digital FAP" kits' electrocardiographs export a digital signal (and in which format)? If so, the photo path is not needed for them | Author, MoH |
 | Q4 | Is signal available inside typical FAP buildings, and with what upload speed? | Field test (E4) |
