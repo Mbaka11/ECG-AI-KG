@@ -49,15 +49,18 @@ def main(argv: list[str] | None = None) -> int:
         subprocess.run([py, str(HERE / "run_digitiser.py"), str(stage), str(out)], check=True,
                        stdout=subprocess.DEVNULL)
 
-    classes = {r["record"]: r["class"] for r in csv.DictReader(open(pack / "pack.csv"))}
+    pack_rows = {r["record"]: r for r in csv.DictReader(open(pack / "pack.csv"))}
+    classes = {k: r["class"] for k, r in pack_rows.items()}
     rows = []
     for p in csv.DictReader(open(stage / "photos.csv")):
         rec_id, name = p["record"], p["staged"]
         row = {"photo": Path(p["original"]).name, "condition": p["condition"], "record": rec_id,
                "class": classes.get(rec_id, ""), "digitised": False, "snr_median": "", "snr_II": "",
-               "urgency_image": "GREY", "hr_image": "", "urgency_truth": "", "hr_truth": "", "match": ""}
+               "urgency_image": "GREY", "hr_image": "", "urgency_truth": "", "hr_truth": "", "match": "", "variant": pack_rows.get(rec_id, {}).get("variant", "")}
         pred_path = out / name
-        truth_path = pack / "truth" / rec_id
+        info = pack_rows.get(rec_id, {})
+        variant = info.get("variant", "")      # "", bw, cols2, norhythm
+        truth_path = pack / "truth" / (info.get("base_record") or rec_id)
         if rec_id and truth_path.with_suffix(".hea").exists():
             t = wfdb.rdrecord(str(truth_path))
             at = assess(lead(t), t.fs)
@@ -69,7 +72,8 @@ def main(argv: list[str] | None = None) -> int:
             ai = assess(lead(pr), pr.fs)
             row["urgency_image"] = ai.urgency.name
             row["hr_image"] = round(ai.rhythm.hr_bpm) if ai.rhythm.hr_bpm else ""
-            if rec_id and truth_path.with_suffix(".hea").exists():
+            # cols2 / norhythm pages place the leads differently, so the 3x4 SNR comparison does not apply
+            if rec_id and truth_path.with_suffix(".hea").exists() and variant not in ("cols2", "norhythm"):
                 s = score_page(leads(t), leads(pr), fs=int(t.fs))
                 snr = np.array([x.snr_db for x in s], dtype=float)
                 row["snr_median"] = round(float(np.nanmedian(snr)), 1) if snr.size else ""

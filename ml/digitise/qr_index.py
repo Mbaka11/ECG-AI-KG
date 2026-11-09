@@ -57,7 +57,7 @@ def main(argv: list[str]) -> int:
         shutil.copy(f, stage / staged)
         rec = read_qr(f)
         if not rec:
-            m = re.search(r"(\d{5}_hr)", f.name)
+            m = re.search(r"(\d{5}_hr(?:_(?:bw|cols2|norhythm))?)", f.name)
             rec = m.group(1) if m else ""
         rows.append({"staged": Path(staged).stem, "condition": cond, "original": str(f), "record": rec})
         print(f"{'OK ' if rec else '?? '} {cond:<12} {f.name:<30} {rec}")

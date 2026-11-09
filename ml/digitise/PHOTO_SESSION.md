@@ -8,7 +8,14 @@ About 40 minutes of shooting, then about 30 minutes of automatic scoring.
 
 ## 1. Print (once)
 
-- File: `data/photo_pack/print_pack_A4.pdf` (24 pages, A4 landscape, already the right orientation).
+- File: `data/photo_pack/print_pack_A4.pdf` (**54 pages**, A4 landscape, already the right orientation).
+  - Pages 1-24: the main set.
+  - Pages 25-48: **backup pages**, 24 more PTB-XL records (more heart attacks, bundle blocks, atrial
+    fibrillation, irregular beats, supraventricular tachycardia, WPW, hypertrophy).
+  - Pages 49-54: **layout variants** of six main records, in case the real machine looks different:
+    49-50 black-and-white page, 51-52 six rows by two columns, 53-54 no rhythm strip.
+  Print all 54 once; shoot pages 1-24 first and keep the rest as spares. Scoring works with any page.
+  For pages 51-54 only the urgency is compared (the lead positions differ, so no SNR is computed).
 - **Colour** (the red grid is what the digitiser removes), **one-sided**, plain **matte** paper
   (glossy paper makes glare). Printer quality **Standard or Best, not Draft/Economy**: a faded grid
   changes what the model sees and spoils the test.

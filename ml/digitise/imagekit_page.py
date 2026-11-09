@@ -27,8 +27,13 @@ def main(argv: list[str]) -> int:
     return 0
 
 
-def render_pages(out_dir: Path, records: list[Path]) -> list[Path]:
-    """Render each WFDB record (path without extension) to OUT_DIR/<record name>.png."""
+def render_pages(out_dir: Path, records: list[Path], *, columns: int = -1, full_mode: str = "II",
+                 bw: bool = False, suffix: str = "") -> list[Path]:
+    """Render each WFDB record (path without extension) to OUT_DIR/<record name><suffix>.png.
+
+    Variants: `columns` = 1 (one lead per row), 2 (6 rows x 2 columns) or -1 (the default 3x4 grid);
+    `full_mode` = "II" (rhythm strip, default) or "None"; `bw` = black-and-white page.
+    """
     out_dir = out_dir.resolve()
     records = [r.resolve() for r in records]
     gen_dir = Path(os.environ.get("ECG_DIGITISER_DIR", DEFAULT_DIR)).resolve() / "ecg-image-generator"
@@ -51,7 +56,7 @@ def render_pages(out_dir: Path, records: list[Path]) -> list[Path]:
             output_directory=str(out_dir),
             seed=7,
             add_dc_pulse=bernoulli(1),
-            add_bw=bernoulli(0),
+            add_bw=bernoulli(1 if bw else 0),
             show_grid=bernoulli(1),
             add_print=bernoulli(0),
             configs=configs,
@@ -59,12 +64,12 @@ def render_pages(out_dir: Path, records: list[Path]) -> list[Path]:
             pad_inches=0,
             font_type=os.path.join("Fonts", "Times_New_Roman.ttf"),
             standard_colours=5,
-            full_mode="II",
-            columns=-1,
+            full_mode=full_mode,
+            columns=columns,
         )
         for f in files:
             # Name the page after the record so the digitiser output matches the ground truth.
-            dst = out_dir / f"{rec.name}.png"
+            dst = out_dir / f"{rec.name}{suffix}.png"
             shutil.move(f, dst)
             pages.append(dst)
             print("page", dst)
