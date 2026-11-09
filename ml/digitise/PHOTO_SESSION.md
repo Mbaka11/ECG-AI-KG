@@ -6,12 +6,18 @@ not patients. Never use real patient ECGs for this test.**
 
 About 40 minutes of shooting, then about 30 minutes of automatic scoring.
 
-## 1. Print
+## 1. Print (once)
 
-- Build the pack (once): `make_print_pack.py` → `data/photo_pack/print_pack_A4.pdf` (24 pages).
-- Print **in colour**, A4 landscape, "fit to page" (pages come out at ~97 % of true size; the
-  digitiser measures scale from the page, so this is fine).
-- Optional: print pages 1-4 again in black and white (put their photos in a `bw` folder).
+- File: `data/photo_pack/print_pack_A4.pdf` (24 pages, A4 landscape, already the right orientation).
+- **Colour** (the red grid is what the digitiser removes), **one-sided**, plain **matte** paper
+  (glossy paper makes glare). Printer quality **Standard or Best, not Draft/Economy**: a faded grid
+  changes what the model sees and spoils the test.
+- Scale: "Fit to page" is fine (pages come out at ~97 % of true size; the digitiser measures the
+  scale from the page).
+- **One copy is enough**: shoot every condition from the same sheets, in the order in section 3
+  (flat conditions first, folding last). Do not write on the pages.
+- Check the printout: the grid is red and clearly visible, the QR code (top right) is sharp, and the
+  line "Test page NN - PTB-XL ..." is readable.
 
 ## 2. Phone settings
 
@@ -21,17 +27,21 @@ About 40 minutes of shooting, then about 30 minutes of automatic scoring.
 
 ## 3. What to shoot (one folder per condition)
 
-| Folder | Pages | How |
-|---|---|---|
-| `ideal` | all 1-24 | Flat on a table, daylight or bright room, phone held parallel above the page, page fills most of the frame. |
-| `angle` | 1-8 | Same, but phone tilted about 20-30° (page looks like a trapezoid). |
-| `shadow` | 1-8 | A hand or phone shadow across part of the page. |
-| `curved` | 9-16 | Page folded once and unfolded, or held so it curls. |
-| `dim` | 9-16 | Evening, one indoor lamp, no flash. |
-| `far` | 17-24 | Page fills only about half the frame. |
-| `flash` | 17-24 | Flash on (glare spot is expected). |
+Shoot in this order, so one copy of each page survives all conditions: flat first, folded last.
 
-72 photos in total. Partial sets are fine: anything is better than nothing; `ideal` matters most.
+| Order | Folder | How | Minimum (72 total) | Full (168 total) |
+|---|---|---|---|---|
+| 1 | `ideal` | Flat on a table, daylight or bright room, phone parallel above the page, page fills most of the frame. | pages 1-24 | pages 1-24 |
+| 2 | `far` | Same, but the page fills only about half the frame. | pages 17-24 | pages 1-24 |
+| 3 | `angle` | Phone tilted about 20-30° (page looks like a trapezoid). | pages 1-8 | pages 1-24 |
+| 4 | `shadow` | A hand or phone shadow across part of the page. | pages 1-8 | pages 1-24 |
+| 5 | `flash` | Flash on (a glare spot is expected). | pages 17-24 | pages 1-24 |
+| 6 | `dim` | Evening, one indoor lamp, no flash. | pages 9-16 | pages 1-24 |
+| 7 | `curved` | Page folded once and unfolded, or held so it curls. | pages 9-16 | pages 1-24 |
+
+Start with the minimum set. If you have time, add the rest of the full set, always starting with the
+conditions that cost the least (`far`, `angle`, `shadow`). `ideal` matters most; the QR code must be
+visible in every photo. Take each photo once, do not delete "bad" ones: bad photos are the test.
 
 ## 4. Put the photos in place
 
